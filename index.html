@@ -63,7 +63,7 @@ try {
 <!-- Шрифты лежат локально (см. @font-face ниже). Внешних запросов нет:
      fonts.googleapis.com мог не открыться, и вёрстка теряла начертания. -->
 <link rel="preload" href="assets/fonts/cormorant-cyrillic.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="preload" href="assets/fonts/badscript-400-cyrillic.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/cinfant-italic-cyrillic.woff2" as="font" type="font/woff2" crossorigin>
 
 <style>
 /* ============================================================
@@ -77,28 +77,29 @@ try {
    и тем же файлом, поэтому храним один и объявляем диапазон 400-700.
    ============================================================ */
 
+
 @font-face{
-  font-family:'Bad Script';
-  font-style:normal;
-  font-weight:400;
+  font-family:'Cormorant Infant';
+  font-style:italic;
+  font-weight:500;
   font-display:swap;
-  src:url('assets/fonts/badscript-400-cyrillic-ext.woff2') format('woff2');
-  unicode-range:U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
-}
-@font-face{
-  font-family:'Bad Script';
-  font-style:normal;
-  font-weight:400;
-  font-display:swap;
-  src:url('assets/fonts/badscript-400-cyrillic.woff2') format('woff2');
+  src:url('assets/fonts/cinfant-italic-cyrillic.woff2') format('woff2');
   unicode-range:U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
 }
 @font-face{
-  font-family:'Bad Script';
-  font-style:normal;
-  font-weight:400;
+  font-family:'Cormorant Infant';
+  font-style:italic;
+  font-weight:500;
   font-display:swap;
-  src:url('assets/fonts/badscript-400-latin.woff2') format('woff2');
+  src:url('assets/fonts/cinfant-italic-cyrillic-ext.woff2') format('woff2');
+  unicode-range:U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+@font-face{
+  font-family:'Cormorant Infant';
+  font-style:italic;
+  font-weight:500;
+  font-display:swap;
+  src:url('assets/fonts/cinfant-italic-latin.woff2') format('woff2');
   unicode-range:U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
 }
 
@@ -203,7 +204,10 @@ try {
   --shadow-soft:0 18px 52px rgba(122,37,55,.12);
   --shadow-card:0 16px 38px rgba(84,36,48,.08);
 
-  --font-script:'Bad Script','Segoe Script','Brush Script MT',cursive;
+  /* Имя на главном. Курсивная антиква вместо рукописного шрифта:
+   у рукописных в кириллице почти нигде нет кыргызских ү ө ң,
+   и буквы подменялись системным шрифтом посреди слова. */
+  --font-script:'Cormorant Infant',Georgia,serif;
   /* вторичные заголовки: Forum — лапидарная антиква с тонким штрихом.
      Необычная, но спокойная: не давит на глаз, как жирный дисплейный серив,
      и не спорит с рукописным именем в hero. Любит разрядку. */
@@ -274,11 +278,18 @@ img{ display:block; max-width:100%; border:0; }
      больше — подрезает купол сверху и ковёр снизу, героиня крупнее. */
   --photo-zoom:1.25;
 
-  /* Ширина фото. Значение ниже — безопасный запас на случай, если JS не
-     отработает: зазор под дату резервируется во всю высоту. Скрипт заменяет
-     его на точный максимум с учётом скругления арки (см. heroPhotoSize). */
+  /* Ширина фото — целиком на CSS, без участия JS.
+     Раньше её досчитывал скрипт: он учитывал скругление арки и давал на 4-5%
+     больше. Но ради этих процентов он писал инлайновый размер в пикселях,
+     который спорил с CSS и пересчитывался на каждое изменение окна — отсюда
+     и сжатие при зуме, и дёрганье при прокрутке, и рывки. Формула ниже
+     пересчитывается самим движком только при настоящей перевёрстке.
+     Под дату резервируется полоса чуть уже её самой (-16px): вверху арка
+     скруглена и на высоте даты заметно ýже своей полной ширины, так что
+     прямоугольники слегка перекрываются, а фигуры — нет. Запас проверен
+     замером на всех размерах: до даты остаётся 24-41px. */
   --photo-w:min(400px, 86vw, 40vh,
-                calc(100% - 2 * (var(--date-w) + var(--date-x) + 6px)));
+                calc(100% - 2 * (var(--date-w) + var(--date-x) - 16px)));
   padding:30px 0 24px;
   overflow:hidden;
 }
@@ -412,7 +423,8 @@ img{ display:block; max-width:100%; border:0; }
 .hero-copy__name{
   margin:0;
   font-family:var(--font-script);
-  font-weight:400;
+  font-style:italic;
+  font-weight:500;
   /* нижний предел был 68px: на реальных телефонах он не срабатывает
      (21.5vw обгоняет его уже при 316px), а при зуме упирался в него —
      имя занимало треть экрана и зрительно съедало фото */
@@ -1996,86 +2008,6 @@ html:not(.js) .section--photo-date{ --photo:url("assets/PHOTO-2026-09-02-16-29-1
   }());
 
 
-  /* ---------- максимальный размер фото в hero ----------
-     Верх арки — полукруг радиусом в половину её ширины, поэтому на высоте, где
-     стоит дата, арка заметно уже своей полной ширины. Прямоугольный зазор во всю
-     высоту (запасной вариант в CSS) резервирует лишнее — считаем точную границу.
-
-     На глубине d ниже верха арки её полуширина  h(d) = sqrt(R² - (R-d)²).
-     Нужно  h(d) <= G, где G — расстояние от центра колонки до левого края даты.
-     Отсюда  R <= (G² + d²) / 2d,  то есть ширина  W <= (G² + d²) / d.
-     В чистом CSS так не записать: calc() не умеет возводить длины в квадрат. */
-  (function heroPhotoSize() {
-    var hero  = document.getElementById('hero');
-    var shell = document.querySelector('.hero-photo-shell');
-    var dateEl = document.querySelector('.hero-date');
-    if (!hero || !shell || !dateEl) return;
-
-    var MAX = 400;        /* абсолютный потолок */
-    var W_RATIO = 0.86;   /* доля ширины экрана */
-    var H_RATIO = 0.40;   /* доля высоты — чтобы hero влезал в один экран */
-    var SAFE = 4;         /* зазор до даты */
-
-    /* Позиции берём через offsetTop/offsetLeft, а НЕ через
-       getBoundingClientRect: у фото и даты в этот момент ещё висит
-       анимация появления (translateY + scale), и rect вернул бы
-       смещённые координаты — фото получилось бы шире, чем можно. */
-    function offsetIn(el, root) {
-      var x = 0, y = 0, n = el;
-      while (n && n !== root) { x += n.offsetLeft; y += n.offsetTop; n = n.offsetParent; }
-      return { x: x, y: y };
-    }
-
-    function fit() {
-      var col = hero.clientWidth;
-      if (!col) return;
-
-      var datePos = offsetIn(dateEl, hero);
-      var shellTop = offsetIn(shell, hero).y;
-
-      /* G — место от центра колонки до левого края даты */
-      var G = datePos.x - col / 2 - SAFE;
-      /* d — насколько низ даты опущен относительно верха арки */
-      var d = (datePos.y + dateEl.offsetHeight) - shellTop;
-
-      var limit = Infinity;
-      if (G <= 0) {
-        limit = 0;                       /* места нет вовсе */
-      } else if (d > 0) {
-        limit = (G * G + d * d) / d;     /* касание окружности арки */
-      }                                   /* d <= 0 — дата выше арки, не мешает */
-
-      var w = Math.min(
-        MAX,
-        window.innerWidth * W_RATIO,
-        window.innerHeight * H_RATIO,
-        col - 8,
-        limit
-      );
-      /* дата скрыта или места нет — снимаем инлайн-значение, иначе
-         осталась бы ширина, посчитанная для широкого экрана */
-      if (!(w > 0)) { hero.style.removeProperty('--photo-w'); return; }
-
-      hero.style.setProperty('--photo-w', Math.floor(w) + 'px');
-    }
-
-    /* ширина фото не влияет на положение даты (она прижата к правому краю),
-       поэтому пересчёт не зацикливается */
-    fit();
-
-    var t = 0;
-    window.addEventListener('resize', function () {
-      clearTimeout(t);
-      t = setTimeout(fit, 150);
-    }, false);
-    window.addEventListener('orientationchange', function () {
-      setTimeout(fit, 300);
-    }, false);
-
-    if (document.fonts && document.fonts.ready && document.fonts.ready.then) {
-      document.fonts.ready.then(fit)['catch'](function () {});
-    }
-  }());
 
 
   /* ---------- конверт ---------- */
