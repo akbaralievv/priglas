@@ -58,7 +58,7 @@ try {
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300&family=Marck+Script&family=Forum&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Marck+Script&family=Forum&display=swap" rel="stylesheet">
 
 <style>
 /* ============================================================
@@ -328,6 +328,8 @@ img{ display:block; max-width:100%; border:0; }
   background:url("assets/ornament-strip.png") center/100% 100% no-repeat;
   opacity:.88;
 }
+/* тот же приём, что и у конверта: webp вдвое легче, но у фона нет <picture> */
+.js-webp .ornament-strip{ background-image:url("assets/ornament-strip.webp"); }
 @supports not (aspect-ratio:1/1){
   .ornament-strip{ height:0; padding-bottom:8.8%; }
 }
@@ -891,9 +893,11 @@ img{ display:block; max-width:100%; border:0; }
 }
 
 /* весь текст лежит в карточке — снимок можно показать сильнее */
-.section--photo-invite{ --photo:url("assets/PHOTO-2026-09-02-16-23-56.jpg"); --veil:.5; }
+.is-open-gate .section--photo-invite{ --photo:url("assets/PHOTO-2026-09-02-16-23-56.jpg"); }
+.section--photo-invite{ --veil:.5; }
 /* «Той күнү» лежит прямо на снимке — вуаль плотнее */
-.section--photo-date{   --photo:url("assets/PHOTO-2026-09-02-16-29-11.jpg"); --veil:.62; }
+.is-open-gate .section--photo-date{ --photo:url("assets/PHOTO-2026-09-02-16-29-11.jpg"); }
+.section--photo-date{ --veil:.62; }
 
 /* на узких экранах снимок кадрируется сильнее — сдвигаем к центру сюжета */
 @media (max-width:420px){
@@ -966,6 +970,10 @@ img{ display:block; max-width:100%; border:0; }
    ============================================================ */
 
 .gate{ display:none; }
+
+/* без JS стартового экрана нет — фоны секций подключаем сразу */
+html:not(.js) .section--photo-invite{ --photo:url("assets/PHOTO-2026-09-02-16-23-56.jpg"); }
+html:not(.js) .section--photo-date{ --photo:url("assets/PHOTO-2026-09-02-16-29-11.jpg"); }
 
 .js .gate{
   /* Габариты экрана держим в переменных: в calc() нельзя сослаться на ширину
@@ -1194,7 +1202,9 @@ img{ display:block; max-width:100%; border:0; }
   </svg>
 </button>
 
-<audio id="bgMusic" loop preload="metadata" playsinline>
+<!-- preload="none": трек 2,4 МБ, тянуть его при загрузке страницы нельзя.
+     Скачивание стартует только когда гость откроет конверт. -->
+<audio id="bgMusic" loop preload="none" playsinline>
   <source src="assets/music.m4a" type="audio/mp4">
   <source src="assets/music.mp3" type="audio/mpeg">
 </audio>
@@ -1231,7 +1241,7 @@ img{ display:block; max-width:100%; border:0; }
         <div class="hero-photo-wrap">
           <div class="hero-photo-shell">
             <img class="hero-photo" src="assets/hero4.jpg"
-                 width="975" height="1300"
+                 width="750" height="1000"
                  alt="Айчүрөк улуттук көйнөктө"
                  decoding="async" fetchpriority="high">
           </div>
@@ -1472,20 +1482,37 @@ img{ display:block; max-width:100%; border:0; }
       fade(0.45);
     }
 
-    /* onOk вызывается только если звук реально пошёл */
+    /* Промис от play() держим под рукой. Если вызвать pause(), пока он ещё не
+       разрешился, браузер отклоняет его с AbortError — а необработанное
+       отклонение всплывает в консоль. Поэтому паузу откладываем до тех пор,
+       пока play() не отработает, а сам промис всегда перехватываем. */
+    var pending = null;
+
     function play(onOk) {
       var p;
       try { p = audio.play(); } catch (e) { return; }
 
       if (p && typeof p.then === 'function') {
+        pending = p;
         p.then(function () {
+          pending = null;
           started();
           if (onOk) { onOk(); }
-        })['catch'](function () { /* автозапуск заблокирован — ждём действия гостя */ });
+        }, function () {
+          pending = null;   /* автозапуск заблокирован или прерван — это норма */
+        });
       } else {
         /* старые браузеры не возвращают промис — считаем, что пошло */
         started();
         if (onOk) { onOk(); }
+      }
+    }
+
+    function pause() {
+      if (pending) {
+        pending.then(function () { audio.pause(); }, function () {});
+      } else {
+        audio.pause();
       }
     }
 
@@ -1494,7 +1521,7 @@ img{ display:block; max-width:100%; border:0; }
       btn.classList.remove('is-playing');
       btn.setAttribute('aria-pressed', 'false');
       btn.setAttribute('aria-label', 'Музыканы күйгүзүү');
-      fade(0, function () { audio.pause(); });
+      fade(0, function () { pause(); });
     }
 
     /* load() сбрасывает уже накопленный буфер — дёргаем его только если
@@ -1537,7 +1564,7 @@ img{ display:block; max-width:100%; border:0; }
 
     document.addEventListener('visibilitychange', function () {
       if (!wanted) return;
-      if (document.hidden) { audio.pause(); } else { audio.play(); }
+      if (document.hidden) { pause(); } else { play(); }
     }, false);
   }());
 
@@ -1883,7 +1910,7 @@ img{ display:block; max-width:100%; border:0; }
         gate.classList.add('is-open');
 
         /* снимаем блокировку прокрутки и отпускаем анимации появления hero */
-        root.className = root.className.replace(/\bis-locked\b/, '');
+        root.className = root.className.replace(/\bis-locked\b/, '') + ' is-open-gate';
         window.scrollTo(0, 0);
 
         setTimeout(function () {
