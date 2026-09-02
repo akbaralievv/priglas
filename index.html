@@ -1,0 +1,1905 @@
+<!DOCTYPE html>
+<html lang="ky">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#fbf4ee">
+<meta name="description" content="Айчүрөктүн кыз узатуу тою. 22-сентябрь, 2026-жыл, саат 17:00. «Хан Сарай Гранд Холл» рестораны, Манас шаары.">
+<title>Айчүрөк — Кыз узатуу</title>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     ПРЕВЬЮ ССЫЛКИ В МЕССЕНДЖЕРАХ
+
+     ВАЖНО: адреса ниже должны быть АБСОЛЮТНЫМИ. WhatsApp, Telegram,
+     Instagram и ВК не достраивают относительные пути — с «assets/...»
+     картинка просто не покажется.
+
+     Когда сайт будет выложен, замени https://example.com на свой домен.
+     Он встречается ровно 5 раз: canonical, og:url, og:image,
+     og:image:secure_url, twitter:image. Больше нигде адреса нет.
+     ═══════════════════════════════════════════════════════════════ -->
+<link rel="canonical" href="https://example.com/">
+
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Айчүрөк · Кыз узатуу">
+<meta property="og:locale" content="ky_KG">
+<meta property="og:locale:alternate" content="ru_RU">
+<meta property="og:title" content="Айчүрөк — Кыз узатуу тою">
+<meta property="og:description" content="22-сентябрь, 2026-жыл, саат 17:00. «Хан Сарай Гранд Холл» рестораны, Манас шаары. Сиздерди чакырабыз!">
+<meta property="og:url" content="https://example.com/">
+<meta property="og:image" content="https://example.com/assets/preview.jpg">
+<meta property="og:image:secure_url" content="https://example.com/assets/preview.jpg">
+<meta property="og:image:type" content="image/jpeg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Айчүрөк — кыз узатуу тоюна чакыруу">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Айчүрөк — Кыз узатуу тою">
+<meta name="twitter:description" content="22-сентябрь, 2026-жыл, саат 17:00. «Хан Сарай Гранд Холл» рестораны, Манас шаары.">
+<meta name="twitter:image" content="https://example.com/assets/preview.jpg">
+
+<link rel="icon" href="assets/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="assets/icon-180.png">
+
+<script>
+/* Ставим класс до первой отрисовки: без JS конверт не показывается вовсе
+   и приглашение открыто сразу, а с JS страница не мигает контентом. */
+document.documentElement.className += ' js is-locked';
+/* WebP отдаём только тем, кто его точно тянет: у фона нет <picture>,
+   поэтому решаем классом на <html> ещё до первой отрисовки. */
+try {
+  var c = document.createElement('canvas');
+  if (c.getContext && c.toDataURL('image/webp').indexOf('data:image/webp') === 0) {
+    document.documentElement.className += ' js-webp';
+  }
+} catch (e) {}
+</script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300&family=Marck+Script&family=Forum&display=swap" rel="stylesheet">
+
+<style>
+/* ============================================================
+   АЙЧҮРӨК · КЫЗ УЗАТУУ
+   ============================================================ */
+
+:root{
+  --paper:#fbf4ee;
+  --paper-deep:#f1e5dc;
+  --paper-soft:#fffaf6;
+
+  --wine:#7a2537;
+  --wine-deep:#571424;
+  --wine-soft:#a55d6f;
+
+  --text:#542430;
+  --text-soft:#8f6770;
+
+  --gold:#b78a52;
+  --gold-soft:#d7be93;
+  --rose:#e4c9cf;
+
+  --line:rgba(122,37,55,.14);
+  --shadow-soft:0 18px 52px rgba(122,37,55,.12);
+  --shadow-card:0 16px 38px rgba(84,36,48,.08);
+
+  --font-script:'Marck Script','Segoe Script','Brush Script MT',cursive;
+  /* вторичные заголовки: Forum — лапидарная антиква с тонким штрихом.
+     Необычная, но спокойная: не давит на глаз, как жирный дисплейный серив,
+     и не спорит с рукописным именем в hero. Любит разрядку. */
+  --font-display:'Forum','Cormorant Garamond',Georgia,serif;
+  --heading:#571424;
+  --font-serif:'Cormorant Garamond',Georgia,'Times New Roman',serif;
+
+  --ease:cubic-bezier(.22,.61,.36,1);
+}
+
+*,*::before,*::after{ -webkit-box-sizing:border-box; box-sizing:border-box; }
+
+html{
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+  -webkit-text-size-adjust:100%;
+  text-size-adjust:100%;
+  scroll-behavior:smooth;
+  background:var(--paper-deep);
+  background:-webkit-gradient(linear,left top,left bottom,from(#fffaf6),color-stop(50%,#fbf4ee),to(#f1e5dc));
+  background:linear-gradient(180deg,var(--paper-soft) 0%,var(--paper) 50%,var(--paper-deep) 100%);
+}
+
+body{
+  max-width:500px;
+  margin:0 auto;
+  color:var(--text);
+  font-family:var(--font-serif);
+  overflow-x:hidden;
+  background:
+    radial-gradient(circle at 50% 24%, rgba(228,201,207,.5), transparent 42%),
+    -webkit-gradient(linear,left top,left bottom,color-stop(48%,rgba(255,250,246,0)),color-stop(74%,rgba(251,244,238,.9)),to(#fbf4ee));
+  background:
+    radial-gradient(circle at 50% 24%, rgba(228,201,207,.5), transparent 42%),
+    linear-gradient(180deg, rgba(255,250,246,0) 48%, rgba(251,244,238,.9) 74%, var(--paper) 100%);
+}
+
+/* тонкие борта у широкой колонки на десктопе */
+@media (min-width:560px){
+  body{
+    -webkit-box-shadow:0 0 90px rgba(122,37,55,.10);
+    box-shadow:0 0 90px rgba(122,37,55,.10);
+  }
+}
+
+img{ display:block; max-width:100%; border:0; }
+
+.page-shell{ position:relative; overflow:hidden; background: radial-gradient(circle at top, rgba(228,201,207,.34), transparent 34%),
+    linear-gradient(180deg, var(--paper-soft) 0%, var(--paper) 50%, var(--paper-deep) 100%); }
+
+/* ============================================================
+   HERO
+   ============================================================ */
+
+.hero{
+  position:relative;
+  /* Дата и фото делят ширину колонки. Кегль задаёт ширину колонки даты
+     (2.25em хватает на «2026» с разрядкой), фото забирает остаток —
+     так прямоугольники не пересекаются ни на одной ширине экрана. */
+  --date-fs:clamp(17px,4.8vw,24px);
+  --date-w:calc(var(--date-fs) * 2.25);
+  --date-x:clamp(6px,2.2vw,12px);
+  --date-line:clamp(14px,4vw,20px);
+
+  /* Приближение кадра внутри арки. 1 — виден весь снимок целиком;
+     больше — подрезает купол сверху и ковёр снизу, героиня крупнее. */
+  --photo-zoom:1.25;
+
+  /* Ширина фото. Значение ниже — безопасный запас на случай, если JS не
+     отработает: зазор под дату резервируется во всю высоту. Скрипт заменяет
+     его на точный максимум с учётом скругления арки (см. heroPhotoSize). */
+  --photo-w:min(400px, 86vw, 40vh,
+                calc(100% - 2 * (var(--date-w) + var(--date-x) + 6px)));
+  padding:30px 0 24px;
+  overflow:hidden;
+}
+@supports not (height:1svh){
+  .hero{ min-height:640px; }
+}
+
+/* ---- дата в углу ---- */
+.hero-date{
+  position:absolute;
+  top:26px;
+  top:calc(26px + env(safe-area-inset-top));
+  right:var(--date-x);
+  width:var(--date-w);
+  text-align:center;
+  z-index:3;
+  display:-webkit-box; display:-ms-flexbox; display:flex;
+  -webkit-box-orient:vertical; -webkit-box-direction:normal; -ms-flex-direction:column; flex-direction:column;
+  -webkit-box-align:center; -ms-flex-align:center; align-items:center;
+  color:var(--wine);
+}
+.hero-date__value{
+  font-size:var(--date-fs);
+  line-height:1;
+  letter-spacing:.06em;
+  text-indent:.06em;
+}
+.hero-date__line{
+  width:1px;
+  height:var(--date-line);
+  margin:5px 0;
+  background:rgba(122,37,55,.34);
+}
+
+/* ---- фото ---- */
+.hero-stage{
+  position:relative;
+  z-index:2;
+  padding-top:12px;
+}
+
+/* Тень нельзя вешать box-shadow'ом на оболочку: внизу фото уже растворилось,
+   и вылезла бы жёсткая прямоугольная кромка. Поэтому маска переехала на саму
+   оболочку, а drop-shadow на обёртке идёт по альфа-каналу — тень повторяет
+   контур арки и гаснет вместе с подолом. Анимация появления вынесена на
+   отдельный слой, чтобы размытие не пересчитывалось на каждом кадре. */
+.hero-photo-wrap{
+  -webkit-filter:
+    drop-shadow(0 1px 2px rgba(87,20,36,.10))
+    drop-shadow(0 5px 12px rgba(122,37,55,.16));
+  filter:
+    drop-shadow(0 1px 2px rgba(87,20,36,.10))
+    drop-shadow(0 5px 12px rgba(122,37,55,.16));
+}
+
+.hero-photo-shell{
+  position:relative;
+  width:var(--photo-w);
+  aspect-ratio:0.6842105263;
+  margin:0 auto;
+  border-radius:220px 220px 26px 26px;
+  overflow:hidden;
+  background:transparent;
+  isolation:isolate;
+  -webkit-mask-image:linear-gradient(180deg,#000 0%,#000 72%,rgba(0,0,0,.86) 82%,rgba(0,0,0,.42) 92%,transparent 100%);
+  mask-image:linear-gradient(180deg,#000 0%,#000 72%,rgba(0,0,0,.86) 82%,rgba(0,0,0,.42) 92%,transparent 100%);
+  -webkit-mask-repeat:no-repeat; mask-repeat:no-repeat;
+  -webkit-mask-size:100% 100%; mask-size:100% 100%;
+}
+
+/* нет поддержки mask — откатываемся на обычную тень, иначе будет кромка */
+@supports not ((-webkit-mask-image:linear-gradient(#000,transparent)) or (mask-image:linear-gradient(#000,transparent))){
+  .hero-photo-wrap{ -webkit-filter:none; filter:none; }
+  .hero-photo-shell{
+    -webkit-box-shadow:var(--shadow-soft);
+    box-shadow:var(--shadow-soft);
+  }
+}
+@supports not (aspect-ratio:1/1){
+  .hero-photo-shell{ height:0; padding-bottom:146.15%; }
+}
+
+/* растворение фото в фон */
+.hero-photo-shell::before{
+  content:'';
+  position:absolute;
+  left:0; right:0; bottom:0;
+  height:34%;
+  z-index:2;
+  pointer-events:none;
+  background:-webkit-gradient(linear,left top,left bottom,from(rgba(251,244,238,0)),color-stop(24%,rgba(251,244,238,.18)),color-stop(72%,rgba(251,244,238,.72)),to(#fbf4ee));
+  background:linear-gradient(180deg,
+    rgba(251,244,238,0) 0%,
+    rgba(251,244,238,.18) 24%,
+    rgba(251,244,238,.72) 72%,
+    var(--paper) 100%);
+}
+/* лёгкий винный тон поверх снимка */
+.hero-photo-shell::after{
+  content:'';
+  position:absolute;
+  inset:0;
+  z-index:3;
+  pointer-events:none;
+  background:-webkit-gradient(linear,left top,left bottom,from(rgba(255,255,255,.04)),to(rgba(122,37,55,.08)));
+  background:linear-gradient(180deg,rgba(255,255,255,.04),rgba(122,37,55,.08));
+}
+
+.hero-photo{
+  position:relative;
+  z-index:1;
+  width:100%;
+  height:100%;
+  -o-object-fit:cover; object-fit:cover;
+  -o-object-position:center center; object-position:center center;
+  -webkit-transform:scale(var(--photo-zoom));
+  transform:scale(var(--photo-zoom));
+  -webkit-transform-origin:center center;
+  transform-origin:center center;
+}
+
+/* ---- имя, подпись, дата ---- */
+.hero-copy{
+  position:relative;
+  z-index:2;
+  margin-top:-18px;
+  padding:0 28px 10px;
+  text-align:center;
+}
+
+.hero-copy__name{
+  margin:0;
+  font-family:var(--font-script);
+  font-weight:400;
+  font-size:clamp(68px,21.5vw,100px);
+  line-height:1;
+  color:var(--wine);
+  text-shadow:0 10px 30px rgba(122,37,55,.12);
+}
+
+.hero-copy__sub{
+  margin:14px 0 0;
+  font-size:clamp(16px,5vw,22px);
+  font-weight:500;
+  letter-spacing:.44em;
+  text-indent:.44em;
+  text-transform:uppercase;
+  color:var(--wine-soft);
+}
+
+.hero-copy__date{
+  margin:14px 0 0;
+  font-size:clamp(15px,4.2vw,18px);
+  letter-spacing:.16em;
+  text-indent:.16em;
+  color:var(--text-soft);
+  font-weight: 700;
+}
+
+/* ---- орнаментальная лента ---- */
+.ornament-strip{
+  position:relative;
+  z-index:2;
+  width:100%;
+  aspect-ratio:1000/88;
+  /* одна копия во всю ширину: у полосы нет бесшовного стыка, repeat-x дал бы шов */
+  background:url("assets/ornament-strip.png") center/100% 100% no-repeat;
+  opacity:.88;
+}
+@supports not (aspect-ratio:1/1){
+  .ornament-strip{ height:0; padding-bottom:8.8%; }
+}
+
+/* ============================================================
+   ЛЕПЕСТКИ
+   ============================================================ */
+
+.petals{
+  position:fixed;
+  top:0; bottom:0;
+  left:50%;
+  width:min(480px,100%);
+  -webkit-transform:translateX(-50%);
+  transform:translateX(-50%);
+  z-index:4;
+  overflow:hidden;
+  pointer-events:none;
+}
+.petals i{
+  position:absolute;
+  top:-8%;
+  width:8px; height:11px;
+  border-radius:50% 50% 50% 50% / 60% 60% 40% 40%;
+  background:-webkit-gradient(linear,left top,right bottom,from(rgba(228,201,207,.95)),to(rgba(165,93,111,.35)));
+  background:linear-gradient(140deg,rgba(228,201,207,.95),rgba(165,93,111,.35));
+  opacity:0;
+  -webkit-animation:fall linear infinite;
+  animation:fall linear infinite;
+  will-change:transform,opacity;
+}
+.petals i:nth-child(2n){
+  background:-webkit-gradient(linear,left top,right bottom,from(rgba(215,190,147,.9)),to(rgba(183,138,82,.3)));
+  background:linear-gradient(140deg,rgba(215,190,147,.9),rgba(183,138,82,.3));
+}
+.petals i:nth-child(3n){ width:6px; height:8px; }
+.petals i:nth-child(5n){ width:10px; height:13px; }
+
+@-webkit-keyframes fall{
+  0%{ -webkit-transform:translate3d(0,-14vh,0) rotate(0deg); opacity:0 }
+  10%{ opacity:var(--op,.42) }
+  86%{ opacity:var(--op,.42) }
+  100%{ -webkit-transform:translate3d(var(--dx,20px),110vh,0) rotate(var(--rot,420deg)); opacity:0 }
+}
+@keyframes fall{
+  0%{ transform:translate3d(0,-14vh,0) rotate(0deg); opacity:0 }
+  10%{ opacity:var(--op,.42) }
+  86%{ opacity:var(--op,.42) }
+  100%{ transform:translate3d(var(--dx,20px),110vh,0) rotate(var(--rot,420deg)); opacity:0 }
+}
+
+/* ============================================================
+   КНОПКА МУЗЫКИ
+   ============================================================ */
+
+.music{
+  position:fixed;
+  left:16px;
+  left:calc(16px + env(safe-area-inset-left));
+  top:16px;
+  top:calc(16px + env(safe-area-inset-top));
+  z-index:60;
+  width:44px; height:44px;
+  padding:0;
+  border:1px solid var(--line);
+  border-radius:50%;
+  background:rgba(255,250,246,.78);
+  -webkit-backdrop-filter:blur(8px);
+  backdrop-filter:blur(8px);
+  color:var(--wine);
+  cursor:pointer;
+  display:-webkit-box; display:-ms-flexbox; display:flex;
+  -webkit-box-align:center; -ms-flex-align:center; align-items:center;
+  -webkit-box-pack:center; -ms-flex-pack:center; justify-content:center;
+  -webkit-box-shadow:var(--shadow-card);
+  box-shadow:var(--shadow-card);
+  -webkit-transition:-webkit-transform .25s var(--ease), background .25s var(--ease);
+  transition:transform .25s var(--ease), background .25s var(--ease);
+  -webkit-tap-highlight-color:transparent;
+}
+.music:hover{ background:var(--paper-soft); }
+.music:active{ -webkit-transform:scale(.94); transform:scale(.94); }
+.music:focus-visible{ outline:2px solid var(--gold); outline-offset:3px; }
+.music[hidden]{ display:none !important; }
+
+.music__bars{ display:block; }
+.music__bars rect{ -webkit-transform-origin:50% 100%; transform-origin:50% 100%; }
+.music.is-playing .music__bars rect{
+  -webkit-animation:eq .9s ease-in-out infinite;
+  animation:eq .9s ease-in-out infinite;
+}
+.music.is-playing .music__bars rect:nth-child(2){ -webkit-animation-delay:.15s; animation-delay:.15s }
+.music.is-playing .music__bars rect:nth-child(3){ -webkit-animation-delay:.3s;  animation-delay:.3s }
+.music.is-playing .music__bars rect:nth-child(4){ -webkit-animation-delay:.45s; animation-delay:.45s }
+@-webkit-keyframes eq{ 0%,100%{-webkit-transform:scaleY(.35)} 50%{-webkit-transform:scaleY(1)} }
+@keyframes eq{ 0%,100%{transform:scaleY(.35)} 50%{transform:scaleY(1)} }
+
+.music:not(.is-playing)::before{
+  content:'';
+  position:absolute; inset:-1px;
+  border-radius:50%;
+  border:1px solid rgba(183,138,82,.6);
+  -webkit-animation:pulse 2.6s var(--ease) infinite;
+  animation:pulse 2.6s var(--ease) infinite;
+}
+@-webkit-keyframes pulse{ 0%{-webkit-transform:scale(1);opacity:.7} 70%,100%{-webkit-transform:scale(1.5);opacity:0} }
+@keyframes pulse{ 0%{transform:scale(1);opacity:.7} 70%,100%{transform:scale(1.5);opacity:0} }
+
+/* ============================================================
+   ПОЯВЛЕНИЕ
+   ============================================================ */
+
+.reveal{
+  opacity:0;
+  -webkit-animation:riseIn .9s var(--ease) forwards;
+  animation:riseIn .9s var(--ease) forwards;
+}
+@-webkit-keyframes riseIn{
+  from{ opacity:0; -webkit-transform:translate3d(0,24px,0) }
+  to{ opacity:1; -webkit-transform:translate3d(0,0,0) }
+}
+@keyframes riseIn{
+  from{ opacity:0; transform:translate3d(0,24px,0) }
+  to{ opacity:1; transform:translate3d(0,0,0) }
+}
+
+.hero-photo-reveal.reveal{
+  -webkit-animation:photoIn 1.2s var(--ease) forwards;
+  animation:photoIn 1.2s var(--ease) forwards;
+}
+@-webkit-keyframes photoIn{
+  from{ opacity:0; -webkit-transform:translate3d(0,28px,0) scale(.96) }
+  to{ opacity:1; -webkit-transform:translate3d(0,0,0) scale(1) }
+}
+@keyframes photoIn{
+  from{ opacity:0; transform:translate3d(0,28px,0) scale(.96) }
+  to{ opacity:1; transform:translate3d(0,0,0) scale(1) }
+}
+
+.d1{ -webkit-animation-delay:.04s; animation-delay:.04s }
+.d2{ -webkit-animation-delay:.16s; animation-delay:.16s }
+.d3{ -webkit-animation-delay:.70s; animation-delay:.70s }
+.d4{ -webkit-animation-delay:.86s; animation-delay:.86s }
+.d5{ -webkit-animation-delay:1.02s; animation-delay:1.02s }
+.d6{ -webkit-animation-delay:1.20s; animation-delay:1.20s }
+
+/* ============================================================
+   АДАПТИВ / ДОСТУПНОСТЬ
+   ============================================================ */
+
+@media (max-height:620px) and (orientation:landscape){
+  .hero{ min-height:0; padding-top:18px; }
+  .hero-copy__name{ font-size:clamp(44px,9vh,62px); }
+  .ornament-strip{ height:54px; }
+}
+
+@media (prefers-reduced-motion:reduce){
+  .petals{ display:none }
+  .reveal,.hero-photo-reveal.reveal{
+    -webkit-animation:none; animation:none;
+    opacity:1; -webkit-transform:none; transform:none;
+  }
+  .music::before,.music.is-playing .music__bars rect{ -webkit-animation:none; animation:none }
+  html{ scroll-behavior:auto }
+  *{ -webkit-transition-duration:.01ms !important; transition-duration:.01ms !important }
+}
+
+/* ============================================================
+   СЕКЦИИ
+   ============================================================ */
+
+.section{
+  position:relative;
+  padding:60px 28px;
+}
+.section--tight{ padding-top:48px; padding-bottom:48px; }
+.section--compact{ padding-top:20px; padding-bottom:40px; }
+
+.section-card{
+  position:relative;
+  padding:38px 24px 34px;
+  background:rgba(255,250,246,.72);
+  border:1px solid var(--line);
+  border-radius:30px;
+  -webkit-box-shadow:var(--shadow-card);
+  box-shadow:var(--shadow-card);
+  -webkit-backdrop-filter:blur(10px);
+  backdrop-filter:blur(10px);
+  text-align:center;
+}
+
+.section-label{
+  margin:0;
+  font-size:11px;
+  font-weight:500;
+  letter-spacing:.34em;
+  text-indent:.34em;
+  text-transform:uppercase;
+  color:var(--wine-soft);
+}
+
+.section-title{
+  margin:0;
+  font-family:var(--font-display);
+  font-weight:400;
+  font-size:clamp(36px,9.8vw,48px);
+  line-height:1.16;
+  letter-spacing:.06em;
+  text-indent:.06em;
+  color:var(--heading);
+}
+
+.section-copy{
+  margin:0;
+  font-size:clamp(17px,4.6vw,19px);
+  line-height:1.8;
+  letter-spacing:.02em;
+  color:var(--text);
+}
+
+.divider{
+  width:76px;
+  height:1px;
+  margin:18px auto;
+  background:-webkit-gradient(linear,left top,right top,from(transparent),color-stop(50%,#b78a52),to(transparent));
+  background:linear-gradient(90deg,transparent,var(--gold),transparent);
+}
+.divider-dot{
+  width:7px; height:7px;
+  margin:0 auto;
+  border-radius:50%;
+  background:var(--gold);
+}
+
+.ornament-divider{
+  width:min(180px,62%);
+  height:22px;
+  margin:26px auto;
+  background:url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='18' viewBox='0 0 120 18'%3E%3Cg fill='none' stroke='%23b78a52' stroke-width='1' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M2 9H40M80 9H118' stroke-opacity='.55'/%3E%3Cpath d='M60 3.5l5.5 5.5-5.5 5.5-5.5-5.5z'/%3E%3Cpath d='M40 9c0-3.2 3-5.2 5.8-4.1 2.4 1 2.2 4-.5 4.1'/%3E%3Cpath d='M40 9c0 3.2 3 5.2 5.8 4.1 2.4-1 2.2-4-.5-4.1'/%3E%3Cpath d='M80 9c0-3.2-3-5.2-5.8-4.1-2.4 1-2.2 4 .5 4.1'/%3E%3Cpath d='M80 9c0 3.2-3 5.2-5.8 4.1-2.4-1-2.2-4 .5-4.1'/%3E%3C/g%3E%3Cg fill='%237a2537' fill-opacity='.5'%3E%3Ccircle cx='60' cy='9' r='1.5'/%3E%3C/g%3E%3C/svg%3E") center/contain no-repeat;
+}
+
+/* ---- чакыруу ---- */
+.intro-card__name{
+  margin:14px 0 10px;
+  font-family:var(--font-display);
+  font-weight:400;
+  font-size:clamp(40px,11.2vw,54px);
+  line-height:1.16;
+  letter-spacing:.05em;
+  text-indent:.05em;
+  color:var(--heading);
+}
+
+/* ---- календарь ---- */
+.calendar-wrap{ text-align:center; }
+.calendar-meta{
+  margin:6px 0 0;
+  font-size:13px;
+  letter-spacing:.28em;
+  text-indent:.28em;
+  text-transform:uppercase;
+  color:var(--wine-soft);
+}
+.calendar-card{
+  max-width:332px;
+  margin:26px auto 0;
+  padding:24px 18px 22px;
+  background:rgba(255,250,246,.68);
+  border:1px solid var(--line);
+  border-radius:26px;
+  -webkit-box-shadow:var(--shadow-card);
+  box-shadow:var(--shadow-card);
+}
+.calendar-month{
+  margin:0;
+  font-size:16px;
+  letter-spacing:.36em;
+  text-indent:.36em;
+  text-transform:uppercase;
+  color:var(--wine);
+}
+.calendar-grid{
+  display:-ms-grid; display:grid;
+  grid-template-columns:repeat(7,minmax(0,1fr));
+  gap:8px 4px;
+  margin-top:20px;
+}
+.calendar-grid span{
+  display:-webkit-box; display:-ms-flexbox; display:flex;
+  -webkit-box-align:center; -ms-flex-align:center; align-items:center;
+  -webkit-box-pack:center; -ms-flex-pack:center; justify-content:center;
+  min-height:32px;
+  font-size:15px;
+  color:var(--text);
+  /* Cormorant по умолчанию даёт старостильные цифры — в сетке они скачут */
+  -webkit-font-feature-settings:"lnum","tnum";
+  font-feature-settings:"lnum","tnum";
+  font-variant-numeric:lining-nums tabular-nums;
+}
+.calendar-grid .weekday{
+  min-height:20px;
+  font-size:11px;
+  letter-spacing:.1em;
+  text-transform:uppercase;
+  color:var(--wine-soft);
+}
+.calendar-grid .day--empty{ visibility:hidden; }
+.calendar-grid .day--active{
+  position:relative;
+  color:var(--heading);
+}
+.calendar-grid .day--active b{ font-weight:700; }
+.calendar-grid .day--active::after{
+  content:'';
+  position:absolute;
+  top:50%; left:50%;
+  width:32px; height:32px;
+  margin:-16px 0 0 -16px;
+  border:1.4px solid rgba(122,37,55,.7);
+  border-radius:50%;
+}
+.calendar-time{
+  margin:20px 0 0;
+  font-family:var(--font-display);
+  font-weight:400;
+  font-size:clamp(36px,9.8vw,46px);
+  line-height:1;
+  letter-spacing:.1em;
+  text-indent:.1em;
+  color:var(--heading);
+}
+
+/* ---- отсчёт ---- */
+.countdown-wrap{ text-align:center; }
+.countdown-grid{
+  display:-ms-grid; display:grid;
+  grid-template-columns:repeat(4,minmax(0,1fr));
+  gap:10px;
+  margin-top:24px;
+}
+.countdown-unit{
+  padding:18px 6px 16px;
+  border:1px solid var(--line);
+  border-radius:22px;
+  background:rgba(255,250,246,.76);
+  -webkit-box-shadow:var(--shadow-card);
+  box-shadow:var(--shadow-card);
+}
+.countdown-value{
+  font-size:clamp(30px,8.4vw,36px);
+  line-height:1;
+  color:var(--heading);
+  /* моноширинные цифры — иначе плитки дёргаются на каждой секунде */
+  -webkit-font-feature-settings:"lnum","tnum";
+  font-feature-settings:"lnum","tnum";
+  font-variant-numeric:lining-nums tabular-nums;
+}
+.countdown-key{
+  margin-top:8px;
+  font-size:10px;
+  letter-spacing:.16em;
+  text-transform:uppercase;
+  color:var(--wine-soft);
+}
+
+/* ---- адрес ---- */
+.location-wrap{ text-align:center; }
+.location-name{
+  margin:18px 0 0;
+  font-family:var(--font-display);
+  font-size:clamp(21px,5.8vw,27px);
+  letter-spacing:.06em;
+  text-indent:.06em;
+  line-height:1.45;
+  color:var(--heading);
+}
+.location-detail{
+  margin:10px 0 0;
+  font-size:17px;
+  line-height:1.8;
+  color:var(--text-soft);
+}
+.pin-badge{
+  width:56px; height:56px;
+  margin:28px auto 0;
+  border-radius:50%;
+  display:-webkit-box; display:-ms-flexbox; display:flex;
+  -webkit-box-align:center; -ms-flex-align:center; align-items:center;
+  -webkit-box-pack:center; -ms-flex-pack:center; justify-content:center;
+  border:1px solid rgba(122,37,55,.2);
+  background:rgba(255,250,246,.86);
+  color:var(--wine);
+  -webkit-box-shadow:var(--shadow-card);
+  box-shadow:var(--shadow-card);
+}
+.map-btn{
+  display:-webkit-inline-box; display:-ms-inline-flexbox; display:inline-flex;
+  -webkit-box-align:center; -ms-flex-align:center; align-items:center;
+  -webkit-box-pack:center; -ms-flex-pack:center; justify-content:center;
+  margin-top:18px;
+  padding:14px 32px;
+  border-radius:999px;
+  background:-webkit-gradient(linear,left top,right bottom,from(#7a2537),to(#571424));
+  background:linear-gradient(135deg,var(--wine),var(--wine-deep));
+  color:#fff;
+  text-decoration:none;
+  font-family:var(--font-serif);
+  font-size:13px;
+  font-weight:600;
+  letter-spacing:.22em;
+  text-indent:.22em;
+  text-transform:uppercase;
+  -webkit-box-shadow:0 16px 30px rgba(87,20,36,.18);
+  box-shadow:0 16px 30px rgba(87,20,36,.18);
+  -webkit-transition:-webkit-transform .25s var(--ease);
+  transition:transform .25s var(--ease);
+  -webkit-tap-highlight-color:transparent;
+}
+.map-btn:active{ -webkit-transform:scale(.97); transform:scale(.97); }
+.map-btn:focus-visible{ outline:2px solid var(--gold); outline-offset:3px; }
+
+/* ---- той ээлери ---- */
+.owners-name{
+  margin:0;
+  font-family:var(--font-display);
+  font-weight:600;
+  font-size:clamp(30px,8.2vw,42px);
+  line-height:1.3;
+  letter-spacing:.05em;
+  text-indent:.05em;
+  color:var(--heading);
+}
+/* «&» не должен оставаться в конце строки */
+.owners-name .amp{
+  font-family:var(--font-serif);
+  font-style:italic;
+  font-weight:400;
+  font-size:.8em;
+  color:var(--gold);
+}
+
+/* ---- подвал ---- */
+.footer{
+  padding:20px 28px 64px;
+  padding-bottom:calc(64px + env(safe-area-inset-bottom));
+  text-align:center;
+}
+.footer-line{
+  margin:16px 0 0;
+  font-family:var(--font-display);
+  font-weight:400;
+  font-size:clamp(29px,7.8vw,38px);
+  line-height:1.2;
+  letter-spacing:.06em;
+  text-indent:.06em;
+  color:var(--heading);
+}
+.footer-event{
+  margin:10px 0 0;
+  font-size:12px;
+  letter-spacing:.28em;
+  text-indent:.28em;
+  text-transform:uppercase;
+  color:var(--wine-soft);
+}
+.footer-date{
+  margin:12px 0 0;
+  font-size:15px;
+  letter-spacing:.12em;
+  color:var(--text-soft);
+  font-weight:700;
+}
+
+/* ============================================================
+   ПОЯВЛЕНИЕ ПРИ ПРОКРУТКЕ
+   ============================================================ */
+
+/* Прячем только при живом JS: иначе без него (и у краулеров, которые
+   всё-таки рендерят) секции навсегда остались бы прозрачными — показать
+   их было бы некому. Класс .js ставится инлайн-скриптом до первой отрисовки,
+   так что мигания контентом не будет. */
+.js .rv{
+  opacity:0;
+  -webkit-transform:translate3d(0,26px,0);
+  transform:translate3d(0,26px,0);
+  -webkit-transition:opacity .85s var(--ease), -webkit-transform .85s var(--ease);
+  transition:opacity .85s var(--ease), transform .85s var(--ease);
+}
+.rv.is-in{
+  opacity:1;
+  -webkit-transform:translate3d(0,0,0);
+  transform:translate3d(0,0,0);
+}
+/* без JS и без IntersectionObserver содержимое всё равно видно */
+.no-rv .rv{
+  opacity:1;
+  -webkit-transform:none;
+  transform:none;
+}
+
+@media (max-width:420px){
+  .section{ padding:52px 22px; }
+  .section-card{ padding:32px 20px 30px; }
+}
+
+@media (prefers-reduced-motion:reduce){
+  .rv{ opacity:1; -webkit-transform:none; transform:none; -webkit-transition:none; transition:none; }
+}
+
+
+/* ============================================================
+   ФОТО-ФОН СЕКЦИЙ
+   ============================================================ */
+
+.section--photo{
+  position:relative;
+  isolation:isolate;          /* свой контекст наложения для слоёв ниже */
+  overflow:hidden;
+}
+
+/* сам снимок */
+.section--photo::before{
+  content:'';
+  position:absolute;
+  inset:0;
+  z-index:-2;
+  background-image:var(--photo);
+  background-size:cover;
+  background-position:center;
+  background-repeat:no-repeat;
+}
+
+/* бумажная вуаль: гасит контраст под текстом и растворяет края,
+   чтобы фото не упиралось в соседние секции резкой кромкой */
+.section--photo::after{
+  content:'';
+  position:absolute;
+  inset:0;
+  z-index:-1;
+  /* плотность подбирается на секцию: где текст лежит прямо на снимке — гуще */
+  background:linear-gradient(180deg,
+      var(--paper) 0%,
+      rgba(251,244,238,var(--veil,.7)) 16%,
+      rgba(251,244,238,var(--veil,.7)) 84%,
+      var(--paper) 100%);
+}
+
+/* карточки поверх фото делаем плотнее — иначе текст «плывёт» по узору */
+.section--photo .section-card,
+.section--photo .calendar-card{
+  background:rgba(255,250,246,.9);
+  border-color:rgba(122,37,55,.18);
+  -webkit-box-shadow:0 18px 40px rgba(84,36,48,.14);
+  box-shadow:0 18px 40px rgba(84,36,48,.14);
+}
+
+/* заголовок календаря лежит прямо на снимке — добавляем ему воздуха */
+.section--photo .section-title,
+.section--photo .calendar-meta{
+  text-shadow:0 1px 14px rgba(251,244,238,.95);
+}
+
+/* весь текст лежит в карточке — снимок можно показать сильнее */
+.section--photo-invite{ --photo:url("assets/PHOTO-2026-09-02-16-23-56.jpg"); --veil:.5; }
+/* «Той күнү» лежит прямо на снимке — вуаль плотнее */
+.section--photo-date{   --photo:url("assets/PHOTO-2026-09-02-16-29-11.jpg"); --veil:.62; }
+
+/* на узких экранах снимок кадрируется сильнее — сдвигаем к центру сюжета */
+@media (max-width:420px){
+  .section--photo-invite::before{ background-position:52% 42%; }
+  .section--photo-date::before{   background-position:50% 46%; }
+}
+
+
+
+
+/* ============================================================
+   ФИГУРА РЯДОМ С АДРЕСОМ
+   ============================================================ */
+
+.section--location{
+  display:-webkit-box; display:-ms-flexbox; display:flex;
+  -webkit-box-align:end; -ms-flex-align:end; align-items:flex-start;
+  gap:clamp(4px,2vw,14px);
+  padding-left:clamp(10px,3vw,20px);
+}
+
+.location-figure{
+  -webkit-box-flex:0; -ms-flex:0 0 auto; flex:0 0 auto;
+  -ms-flex-item-align:end; align-self:flex-end;
+  pointer-events:none;
+  -webkit-user-select:none; -moz-user-select:none; user-select:none;
+}
+/* Снимок — вырезка с прозрачным фоном (assets/portrait-cut.webp),
+   поэтому здесь не нужны ни рамка, ни mask-image, ни тень — снимок сам
+   растворяется в фон со всех сторон и одинаково выглядит в любом браузере. */
+.location-figure{
+  --loc-h:clamp(300px,115vw,450px);
+}
+.location-figure img{
+  height:var(--loc-h);
+  width:auto;
+  display:block;
+}
+
+.section--location .location-wrap{
+  -webkit-box-flex:1; -ms-flex:1 1 auto; flex:1 1 auto;
+  min-width:0;
+  padding-bottom:clamp(10px,4vw,26px);
+}
+
+/* колонка текста стала уже — подгоняем набор, чтобы ничего не вылезало */
+.section--location .location-name{
+  font-size:clamp(17px,4.4vw,22px);
+  /* иначе в узкой колонке ломается как «Хан Сарай Гранд / Холл» */
+  text-wrap:balance;
+}
+.section--location .location-detail{ margin-top:8px; font-size:16px; }
+.section--location .pin-badge{ width:48px; height:48px; margin-top:20px; }
+.section--location .map-btn{
+  margin-top:14px;
+  padding:13px clamp(14px,4.6vw,26px);
+  font-size:12px;
+  letter-spacing:.14em;
+  text-indent:.14em;
+}
+
+@media (max-width:340px){
+  .location-figure{ --loc-h:290px; }
+  .section--location{ gap:2px; padding-left:8px; padding-right:14px; }
+}
+
+
+/* ============================================================
+   КОНВЕРТ — СТАРТОВЫЙ ЭКРАН
+   ============================================================ */
+
+.gate{ display:none; }
+
+.js .gate{
+  /* Габариты экрана держим в переменных: в calc() нельзя сослаться на ширину
+     родителя из свойства height (проценты там считаются от высоты), поэтому
+     обе стороны конверта выражаем через одну пару значений. */
+  --gw:min(100vw,480px);
+  --gh:100vh;
+
+  display:block;
+  position:fixed;
+  top:0; bottom:0;
+  left:50%;
+  width:min(100vw,480px);
+  -webkit-transform:translateX(-50%);
+  transform:translateX(-50%);
+  z-index:200;
+  overflow:hidden;                 /* лишнее от cover-размера обрезается здесь */
+  /* заливаем поля вокруг колонки на широком экране */
+  -webkit-box-shadow:0 0 0 100vmax #f4e7db;
+  box-shadow:0 0 0 100vmax #f4e7db;
+  -webkit-transition:opacity .55s var(--ease);
+  transition:opacity .55s var(--ease);
+}
+@supports (height:1svh){
+  .js .gate{ --gh:100svh; }
+}
+/* подложка отдельным слоем, чтобы гасить её раньше самого конверта */
+.js .gate::before{
+  content:'';
+  position:absolute;
+  inset:0;
+  background:-webkit-gradient(linear,left top,left bottom,from(#fdf8f4),to(#efdfd0));
+  background:linear-gradient(180deg,#fdf8f4,#efdfd0);
+  -webkit-transition:opacity .6s var(--ease) .35s;
+  transition:opacity .6s var(--ease) .35s;
+}
+.gate.is-opening::before{ opacity:0; }
+
+/* пока конверт закрыт — страница под ним не листается */
+.is-locked, .is-locked body{ overflow:hidden; height:100%; }
+
+/* и не проигрывает своё появление раньше времени */
+.is-locked .reveal,
+.is-locked .hero-photo-reveal{
+  -webkit-animation-play-state:paused; animation-play-state:paused;
+}
+
+.gate.is-open{ opacity:0; pointer-events:none; }
+
+/* ---------- конверт ---------- */
+
+.env{
+  /* Считаем размер вручную вместо object-fit:cover. Cover обрезал бы картинку
+     внутри элемента, и проценты в clip-path (они меряются от элемента, а не от
+     кадра) уехали бы с золотых лент. Здесь элемент сам имеет пропорцию снимка
+     941:1672 и заведомо накрывает экран — лишнее срезает overflow у .gate,
+     а разметка кадра остаётся точной на любом экране. */
+  position:absolute;
+  left:50%; top:50%;
+  -webkit-transform:translate(-50%,-50%);
+  transform:translate(-50%,-50%);
+  width:max(var(--gw), calc(var(--gh) * 941 / 1672));
+  height:max(var(--gh), calc(var(--gw) * 1672 / 941));
+  padding:0;
+  border:0;
+  background:none;
+  cursor:pointer;
+  line-height:0;
+  -webkit-perspective:1500px;
+  perspective:1500px;
+  -webkit-tap-highlight-color:transparent;
+}
+
+.env:focus-visible{ outline:2px solid var(--gold); outline-offset:8px; }
+.env.is-opening{ pointer-events:none; }
+
+/* Невидимый снимок задаёт размер, слои поверх ложатся ровно по нему —
+   поэтому проценты в clip-path всегда попадают в одни и те же детали кадра,
+   на каком бы экране он ни открывался. */
+.env__layer{
+  position:absolute;
+  inset:0;
+  background-image:url("assets/gate-envelope.jpg");
+  background-size:100% 100%;
+  background-repeat:no-repeat;
+  -webkit-box-shadow:0 24px 60px -30px rgba(87,20,36,.45);
+  box-shadow:0 24px 60px -30px rgba(87,20,36,.45);
+}
+.js-webp .env__layer{ background-image:url("assets/gate-envelope.webp"); }
+
+/* нижняя часть — карман */
+.env__pocket{
+  z-index:2;
+  -webkit-clip-path:polygon(0 38.5%, 36% 49.4%, 50% 48.4%, 64% 49.4%, 100% 38.5%, 100% 100%, 0 100%);
+  clip-path:polygon(0 38.5%, 36% 49.4%, 50% 48.4%, 64% 49.4%, 100% 38.5%, 100% 100%, 0 100%);
+}
+/* верхняя — клапан, откидывается от верхней кромки */
+.env__flap{
+  z-index:3;
+  -webkit-clip-path:polygon(0 0, 100% 0, 100% 38.5%, 64% 49.4%, 50% 48.4%, 36% 49.4%, 0 38.5%);
+  clip-path:polygon(0 0, 100% 0, 100% 38.5%, 64% 49.4%, 50% 48.4%, 36% 49.4%, 0 38.5%);
+  -webkit-transform-origin:50% 0;
+  transform-origin:50% 0;
+}
+
+
+/* ---------- отклик на нажатие ----------
+   Кликабелен весь экран, но глазами кнопка — это сургуч. Слой лежит ровно
+   поверх запечённой печати (те же координаты, что у линии разреза) и кликов
+   не перехватывает: состояние берём у родителя.
+   Золотое свечение по золотой печати на кремовой бумаге не читалось вовсе —
+   контраста нет, поэтому отклик строим на тени и лёгком масштабе.
+   Реакции на наведение нет намеренно: она всё равно не работает на тач-экранах,
+   а на десктопе только отвлекала бы от единственного нужного жеста — клика. */
+.env__fx{
+  position:absolute;
+  left:31.4%;
+  top:49.3%;
+  width:36.3%;
+  height:20.4%;
+  z-index:4;
+  border-radius:50%;
+  pointer-events:none;
+  -webkit-transition:-webkit-transform .16s var(--ease), opacity .3s var(--ease), background .2s var(--ease), -webkit-box-shadow .2s var(--ease);
+  transition:transform .16s var(--ease), opacity .3s var(--ease), background .2s var(--ease), box-shadow .2s var(--ease);
+}
+
+
+/* нажатие — печать вдавливается в бумагу */
+.env:active .env__fx{
+  -webkit-transform:scale(.9);
+  transform:scale(.9);
+  background:radial-gradient(74% 74% at 50% 60%, rgba(87,20,36,.42), rgba(87,20,36,.08) 80%);
+  -webkit-box-shadow:inset 0 3px 14px rgba(87,20,36,.55);
+  box-shadow:inset 0 3px 14px rgba(87,20,36,.55);
+}
+/* и весь конверт заметно проседает — нажатие ощущается физически */
+.env{
+  -webkit-transition:-webkit-transform .16s var(--ease), -webkit-filter .16s var(--ease);
+  transition:transform .16s var(--ease), filter .16s var(--ease);
+}
+.env:active{
+  -webkit-transform:translate(-50%,-50%) scale(.985);
+  transform:translate(-50%,-50%) scale(.985);
+  -webkit-filter:brightness(.965);
+  filter:brightness(.965);
+}
+
+/* в момент клика от печати расходится волна — одиночная, винным тоном:
+   он единственный заметен и на кремовой бумаге, и на золоте */
+.env.is-opening .env__fx{
+  -webkit-animation:sealWave .75s var(--ease) forwards;
+  animation:sealWave .75s var(--ease) forwards;
+}
+@-webkit-keyframes sealWave{
+  0%   { -webkit-box-shadow:0 0 0 0 rgba(122,37,55,.34); opacity:1 }
+  100% { -webkit-box-shadow:0 0 0 62px rgba(122,37,55,0); opacity:0 }
+}
+@keyframes sealWave{
+  0%   { box-shadow:0 0 0 0 rgba(122,37,55,.34); opacity:1 }
+  100% { box-shadow:0 0 0 62px rgba(122,37,55,0); opacity:0 }
+}
+
+.env.is-opening .env__flap{
+  -webkit-animation:gateFlap 1s var(--ease) forwards;
+  animation:gateFlap 1s var(--ease) forwards;
+}
+.env.is-opening .env__pocket{
+  -webkit-animation:gatePocket .85s var(--ease) .3s forwards;
+  animation:gatePocket .85s var(--ease) .3s forwards;
+}
+
+@-webkit-keyframes gateFlap{
+  0%{ -webkit-transform:rotateX(0deg) } 100%{ -webkit-transform:rotateX(-112deg) }
+}
+@keyframes gateFlap{
+  0%{ transform:rotateX(0deg) } 100%{ transform:rotateX(-112deg) }
+}
+@-webkit-keyframes gatePocket{
+  0%{ -webkit-transform:translateY(0) } 100%{ -webkit-transform:translateY(104%) }
+}
+@keyframes gatePocket{
+  0%{ transform:translateY(0) } 100%{ transform:translateY(104%) }
+}
+
+/* ---------- подсказка ---------- */
+.gate__hint{
+  position:absolute;
+  z-index:5;
+  left:0; right:0;
+  bottom:clamp(20px,5.5vh,44px);
+  margin:0;
+  text-align:center;
+  font-size:11px;
+  letter-spacing:.3em;
+  text-indent:.3em;
+  text-transform:uppercase;
+  color:var(--wine);
+  text-shadow:0 1px 12px rgba(253,248,244,.95);
+  -webkit-animation:hintPulse 2.6s ease-in-out infinite;
+  animation:hintPulse 2.6s ease-in-out infinite;
+}
+.gate.is-opening .gate__hint,
+.gate.is-open .gate__hint{ opacity:0; -webkit-animation:none; animation:none; -webkit-transition:opacity .3s; transition:opacity .3s; }
+@-webkit-keyframes hintPulse{ 0%,100%{opacity:.6} 50%{opacity:1} }
+@keyframes hintPulse{ 0%,100%{opacity:.6} 50%{opacity:1} }
+
+@media (prefers-reduced-motion:reduce){
+  .env.is-opening .env__flap,
+  .env.is-opening .env__pocket{ -webkit-animation:none; animation:none }
+  .gate__hint{ -webkit-animation:none; animation:none }
+  .env:active{ -webkit-filter:none; filter:none }
+}
+
+</style>
+</head>
+
+<body>
+
+<button class="music" id="musicBtn" type="button" aria-label="Музыканы күйгүзүү" aria-pressed="false" hidden>
+  <svg class="music__bars" width="18" height="16" viewBox="0 0 18 16" aria-hidden="true" focusable="false">
+    <rect x="1"    y="4" width="2.6" height="8"  rx="1.3" fill="currentColor"></rect>
+    <rect x="5.4"  y="2" width="2.6" height="12" rx="1.3" fill="currentColor"></rect>
+    <rect x="9.8"  y="3" width="2.6" height="10" rx="1.3" fill="currentColor"></rect>
+    <rect x="14.2" y="5" width="2.6" height="6"  rx="1.3" fill="currentColor"></rect>
+  </svg>
+</button>
+
+<audio id="bgMusic" loop preload="metadata" playsinline>
+  <source src="assets/music.m4a" type="audio/mp4">
+  <source src="assets/music.mp3" type="audio/mpeg">
+</audio>
+
+
+<div class="gate" id="gate">
+
+  <button class="env" id="envelopeBtn" type="button" aria-label="Чакырууну ачуу">
+    <span class="env__layer env__pocket"></span>
+    <span class="env__layer env__flap"></span>
+    <span class="env__fx" aria-hidden="true"></span>
+  </button>
+
+  <p class="gate__hint" id="gateHint">Чакырууну ачыңыз</p>
+
+</div>
+
+<div class="petals" id="petals" aria-hidden="true"></div>
+
+<div class="page-shell">
+
+  <section class="hero" id="hero">
+
+    <div class="hero-date reveal d1">
+      <span class="hero-date__value">22</span>
+      <span class="hero-date__line" aria-hidden="true"></span>
+      <span class="hero-date__value">09</span>
+      <span class="hero-date__line" aria-hidden="true"></span>
+      <span class="hero-date__value">2026</span>
+    </div>
+
+    <div class="hero-stage">
+      <div class="hero-photo-reveal reveal d2">
+        <div class="hero-photo-wrap">
+          <div class="hero-photo-shell">
+            <img class="hero-photo" src="assets/hero4.jpg"
+                 width="975" height="1300"
+                 alt="Айчүрөк улуттук көйнөктө"
+                 decoding="async" fetchpriority="high">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="hero-copy">
+      <h1 class="hero-copy__name reveal d3">Айчүрөк</h1>
+      <p class="hero-copy__sub reveal d4">Kyz Uzatuu</p>
+      <p class="hero-copy__date reveal d5">22-сентябрь, 2026-жыл · 17:00</p>
+    </div>
+
+  </section>
+
+  <div class="ornament-strip reveal d6" aria-hidden="true"></div>
+
+  <!-- ═══════════ ЧАКЫРУУ ═══════════ -->
+  <section class="section section--compact section--photo section--photo-invite">
+    <div class="section-card intro-card rv">
+      <p class="section-label">Урматтуу коноктор</p>
+      <div class="divider" aria-hidden="true"></div>
+
+      <p class="section-copy">
+        Сизди турмуш жолуна аттанып, ак жоолук салынып,
+        жаңы үй-бүлөгө кадам таштап жаткан
+      </p>
+
+      <h2 class="intro-card__name">Айчүрөк</h2>
+
+      <p class="section-copy">
+        кызыбыздын кыз узатуу тоюна арналган
+        ак дасторконубуздун төрүнө чакырабыз.
+      </p>
+
+      <div class="ornament-divider" aria-hidden="true"></div>
+
+      <p class="section-copy">
+        Кызыбыздын жаңы жашоосуна ак тилек, баталарыңызды берип,
+        кубанычыбызды тең бөлүшүп кетишиңиздерди чын жүрөктөн каалайбыз.
+      </p>
+    </div>
+  </section>
+
+  <!-- ═══════════ ТОЙ КҮНҮ ═══════════ -->
+  <section class="section section--tight section--photo section--photo-date">
+    <div class="calendar-wrap rv">
+      <h2 class="section-title">Той күнү</h2>
+      <p class="calendar-meta">Шейшемби</p>
+
+      <div class="calendar-card">
+        <p class="calendar-month">Сентябрь 2026</p>
+        <div class="calendar-grid"><span class="weekday">Дүй</span><span class="weekday">Шей</span><span class="weekday">Шар</span><span class="weekday">Бей</span><span class="weekday">Жум</span><span class="weekday">Ише</span><span class="weekday">Жек</span><span class="day day--empty"></span><span class="day">1</span><span class="day">2</span><span class="day">3</span><span class="day">4</span><span class="day">5</span><span class="day">6</span><span class="day">7</span><span class="day">8</span><span class="day">9</span><span class="day">10</span><span class="day">11</span><span class="day">12</span><span class="day">13</span><span class="day">14</span><span class="day">15</span><span class="day">16</span><span class="day">17</span><span class="day">18</span><span class="day">19</span><span class="day">20</span><span class="day">21</span><span class="day day--active"><b>22</b></span><span class="day">23</span><span class="day">24</span><span class="day">25</span><span class="day">26</span><span class="day">27</span><span class="day">28</span><span class="day">29</span><span class="day">30</span><span class="day day--empty"></span><span class="day day--empty"></span><span class="day day--empty"></span><span class="day day--empty"></span></div>
+        <div class="divider" aria-hidden="true"></div>
+        <p class="calendar-time">17:00</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════ ТОЙГО ЧЕЙИН ═══════════ -->
+  <section class="section section--tight">
+    <div class="countdown-wrap rv">
+      <p class="section-label">Тойго чейин</p>
+      <div class="countdown-grid" id="countdown">
+        <div class="countdown-unit">
+          <div class="countdown-value" id="cdDays">00</div>
+          <div class="countdown-key">Күн</div>
+        </div>
+        <div class="countdown-unit">
+          <div class="countdown-value" id="cdHours">00</div>
+          <div class="countdown-key">Саат</div>
+        </div>
+        <div class="countdown-unit">
+          <div class="countdown-value" id="cdMinutes">00</div>
+          <div class="countdown-key">Мүнөт</div>
+        </div>
+        <div class="countdown-unit">
+          <div class="countdown-value" id="cdSeconds">00</div>
+          <div class="countdown-key">Секунд</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════ ДАРЕГИБИЗ ═══════════ -->
+  <section class="section section--tight section--location">
+
+    <div class="location-figure rv" aria-hidden="true">
+      <picture>
+        <source srcset="assets/portrait-cut.webp" type="image/webp">
+        <img src="assets/portrait-cut.png" width="420" height="1277"
+             alt="" loading="lazy" decoding="async">
+      </picture>
+    </div>
+
+    <div class="location-wrap rv">
+      <p class="section-label">Дарегибиз</p>
+      <p class="location-name">«Хан Сарай Гранд Холл»<br>рестораны</p>
+      <p class="location-detail">Манас шаары</p>
+
+      <div class="pin-badge" aria-hidden="true">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" focusable="false">
+          <path d="M12 21C12 21 18 15.6 18 10.2C18 6.78 15.314 4 12 4C8.686 4 6 6.78 6 10.2C6 15.6 12 21 12 21Z" stroke="currentColor" stroke-width="1.6"/>
+          <circle cx="12" cy="10" r="2.5" stroke="currentColor" stroke-width="1.6"/>
+        </svg>
+      </div>
+
+      <div>
+        <!-- «Хан-Сарай», Манас: 40.961955, 72.9907826 -->
+        <a class="map-btn" id="mapBtn" target="_blank" rel="noopener noreferrer"
+           href="https://www.google.com/maps/search/%D0%A5%D0%B0%D0%BD-%D0%A1%D0%B0%D1%80%D0%B0%D0%B9/@40.961955,72.9907826,18z">Картадан кароо</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════ ТОЙ ЭЭЛЕРИ ═══════════ -->
+  <div class="ornament-strip" aria-hidden="true"></div>
+
+  <section class="section section--compact">
+    <div class="section-card owners-card rv">
+      <p class="section-label">Урматтоо менен той ээлери</p>
+      <div class="divider" aria-hidden="true"></div>
+      <p class="owners-name">Арстан&nbsp;<span class="amp">&amp;</span>&nbsp;Зуура</p>
+    </div>
+  </section>
+
+  <!-- ═══════════ ПОДВАЛ ═══════════ -->
+  <footer class="footer rv">
+    <div class="divider-dot" aria-hidden="true"></div>
+    <p class="footer-line">Айчүрөк</p>
+    <p class="footer-event">Кыз узатуу</p>
+    <p class="footer-date">22-сентябрь, 2026-жыл &middot; 17:00</p>
+  </footer>
+
+</div>
+
+<script>
+(function () {
+  'use strict';
+
+  var reduced = false;
+  try {
+    reduced = window.matchMedia &&
+              window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  } catch (e) {}
+
+  /* ---------- сброс при каждой перезагрузке ----------
+     По умолчанию браузер восстанавливает позицию прокрутки после F5.
+     Из-за этого автоскролл считал, что гость уже листает сам, и молча
+     отказывался стартовать со второй перезагрузки. Отключаем восстановление
+     и явно поднимаем страницу наверх. */
+  try {
+    if ('scrollRestoration' in history) { history.scrollRestoration = 'manual'; }
+  } catch (e) {}
+  window.scrollTo(0, 0);
+
+  /* возврат «назад» отдаёт страницу из bfcache, скрипты заново не выполняются */
+  window.addEventListener('pageshow', function (e) {
+    if (e.persisted) { window.scrollTo(0, 0); }
+  }, false);
+
+  /* ---------- лепестки ---------- */
+  (function petals() {
+    var box = document.getElementById('petals');
+    if (!box || reduced) return;
+
+    var count = window.innerWidth < 600 ? 26 : 36;
+    var frag = document.createDocumentFragment();
+
+    for (var i = 0; i < count; i++) {
+      var p = document.createElement('i');
+      var dur = 12 + Math.random() * 14;                    /* 12–26 c */
+      var dx  = (Math.random() * 130 - 65).toFixed(0);      /* снос влево/вправо */
+      var rot = (220 + Math.random() * 400).toFixed(0);
+      var op  = (0.26 + Math.random() * 0.3).toFixed(2);
+
+      p.style.left = (Math.random() * 100).toFixed(2) + '%';
+      p.style.animationDuration = dur.toFixed(2) + 's';
+      p.style.animationDelay = (-Math.random() * dur).toFixed(2) + 's';
+      p.style.setProperty('--dx', dx + 'px');
+      p.style.setProperty('--rot', rot + 'deg');
+      p.style.setProperty('--op', op);
+      frag.appendChild(p);
+    }
+    box.appendChild(frag);
+
+    document.addEventListener('visibilitychange', function () {
+      var kids = box.children, s = document.hidden ? 'paused' : 'running';
+      for (var i = 0; i < kids.length; i++) {
+        kids[i].style.webkitAnimationPlayState = s;
+        kids[i].style.animationPlayState = s;
+      }
+    }, false);
+  }());
+
+  /* Конверт открывается кликом — это настоящая пользовательская активация,
+     поэтому музыка и прокрутка запускаются отсюда, а не по таймеру. */
+  var onGateOpen = [];
+  function whenGateOpen(fn) { onGateOpen.push(fn); }
+  function fireGateOpen() {
+    var list = onGateOpen; onGateOpen = [];
+    for (var i = 0; i < list.length; i++) { try { list[i](); } catch (e) {} }
+  }
+
+  /* ---------- музыка ---------- */
+  (function music() {
+    var btn = document.getElementById('musicBtn');
+    var audio = document.getElementById('bgMusic');
+    if (!btn || !audio) return;
+
+    var ready = false, wanted = false;
+
+    audio.addEventListener('error', function () { btn.hidden = true; }, true);
+    audio.addEventListener('loadedmetadata', function () { ready = true; }, false);
+    audio.addEventListener('canplay', function () { ready = true; }, false);
+
+    setTimeout(function () {
+      if (!ready && (audio.error || audio.networkState === 3)) { btn.hidden = true; }
+    }, 2500);
+
+    audio.volume = 0;
+    btn.hidden = false;
+
+    function fade(to, done) {
+      var from = audio.volume, t0 = Date.now();
+      (function step() {
+        var k = Math.min(1, (Date.now() - t0) / 900);
+        audio.volume = Math.max(0, Math.min(1, from + (to - from) * k));
+        if (k < 1) { requestAnimationFrame(step); } else if (done) { done(); }
+      }());
+    }
+
+    function started() {
+      wanted = true;
+      btn.classList.add('is-playing');
+      btn.setAttribute('aria-pressed', 'true');
+      btn.setAttribute('aria-label', 'Музыканы өчүрүү');
+      fade(0.45);
+    }
+
+    /* onOk вызывается только если звук реально пошёл */
+    function play(onOk) {
+      var p;
+      try { p = audio.play(); } catch (e) { return; }
+
+      if (p && typeof p.then === 'function') {
+        p.then(function () {
+          started();
+          if (onOk) { onOk(); }
+        })['catch'](function () { /* автозапуск заблокирован — ждём действия гостя */ });
+      } else {
+        /* старые браузеры не возвращают промис — считаем, что пошло */
+        started();
+        if (onOk) { onOk(); }
+      }
+    }
+
+    function stop() {
+      wanted = false;
+      btn.classList.remove('is-playing');
+      btn.setAttribute('aria-pressed', 'false');
+      btn.setAttribute('aria-label', 'Музыканы күйгүзүү');
+      fade(0, function () { audio.pause(); });
+    }
+
+    /* load() сбрасывает уже накопленный буфер — дёргаем его только если
+       источник действительно не выбран, иначе трек качается заново */
+    function ensureSource() {
+      if (audio.networkState === 3 || audio.readyState === 0) { audio.load(); }
+    }
+
+    btn.addEventListener('click', function () {
+      if (wanted) { stop(); } else { ensureSource(); play(); }
+    }, false);
+
+    /* Пробуем стартовать сразу при загрузке. Браузеры блокируют звук до
+       первого действия пользователя, поэтому промис почти всегда отклоняется —
+       тогда музыку включит первое же касание страницы (слушатели ниже).
+       Молча глотать отказ нельзя было бы только при muted-автозапуске,
+       но фоновая музыка без звука смысла не имеет. */
+    play();
+
+    /* Раньше off() вызывался до play(): если попытка отклонялась (событие без
+       пользовательской активации), слушатели уже были сняты и музыка не
+       включалась больше никогда. Теперь снимаем их только после успеха. */
+    function firstTouch() {
+      if (wanted) { off(); return; }
+      ensureSource();
+      play(off);
+    }
+    function off() {
+      document.removeEventListener('pointerdown', firstTouch, true);
+      document.removeEventListener('touchstart', firstTouch, true);
+      document.removeEventListener('keydown', firstTouch, true);
+      document.removeEventListener('click', firstTouch, true);
+      window.removeEventListener('wheel', firstTouch, true);
+    }
+    document.addEventListener('pointerdown', firstTouch, true);
+    document.addEventListener('touchstart', firstTouch, true);
+    document.addEventListener('keydown', firstTouch, true);
+    document.addEventListener('click', firstTouch, true);
+    window.addEventListener('wheel', firstTouch, true);
+
+    document.addEventListener('visibilitychange', function () {
+      if (!wanted) return;
+      if (document.hidden) { audio.pause(); } else { audio.play(); }
+    }, false);
+  }());
+
+
+  /* ---------- появление секций при прокрутке ----------
+     Раньше здесь был чистый IntersectionObserver, и он терял секции: при
+     быстром пролистывании (флик, Cmd+End, переход по якорю) элемент успевал
+     проскочить мимо окна, ни разу в него не попав. Коэффициент пересечения
+     при этом всё время оставался нулём, события не возникало — и секция
+     оставалась прозрачной навсегда. Поэтому решаем позицией, а не событием:
+     показываем всё, что уже дошло до нижней кромки окна, включая уехавшее
+     выше. Проверка дросселируется кадром, слушатели снимаются, когда
+     показывать больше нечего. */
+  (function revealOnScroll() {
+    var items = [].slice.call(document.querySelectorAll('.rv'));
+    if (!items.length) return;
+
+    if (reduced) {
+      document.documentElement.className += ' no-rv';
+      return;
+    }
+
+    var TRIGGER = 0.88;      /* доля высоты окна, после которой показываем */
+    var ticking = false;
+
+    function sweep() {
+      ticking = false;
+      var line = window.innerHeight * TRIGGER;
+      for (var i = items.length - 1; i >= 0; i--) {
+        if (items[i].getBoundingClientRect().top < line) {
+          items[i].className += ' is-in';
+          items.splice(i, 1);
+        }
+      }
+      if (!items.length) { off(); }
+    }
+
+    function onScroll() {
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(sweep);
+    }
+
+    function off() {
+      window.removeEventListener('scroll', onScroll, passiveOpt);
+      window.removeEventListener('resize', onScroll, passiveOpt);
+    }
+
+    var passive = false;
+    try {
+      window.addEventListener('t', null, Object.defineProperty({}, 'passive', {
+        get: function () { passive = true; return true; }
+      }));
+    } catch (e) {}
+    var passiveOpt = passive ? { passive: true } : false;
+
+    window.addEventListener('scroll', onScroll, passiveOpt);
+    window.addEventListener('resize', onScroll, passiveOpt);
+    sweep();
+  }());
+
+  /* ---------- отсчёт до тоя ---------- */
+  (function countdown() {
+    var box = document.getElementById('countdown');
+    if (!box) return;
+
+    /* смещение +06:00 указано явно — иначе у гостя из другого пояса
+       отсчёт съедет на несколько часов */
+    var target = new Date('2026-09-22T17:00:00+06:00').getTime();
+    if (isNaN(target)) return;
+
+    var els = {
+      d: document.getElementById('cdDays'),
+      h: document.getElementById('cdHours'),
+      m: document.getElementById('cdMinutes'),
+      s: document.getElementById('cdSeconds')
+    };
+    var last = {};
+
+    function pad(n) { return n < 10 ? '0' + n : '' + n; }
+
+    function set(k, v) {
+      if (last[k] === v) return;               /* не трогаем DOM без нужды */
+      last[k] = v;
+      els[k].textContent = v;
+    }
+
+    function tick() {
+      var left = target - Date.now();
+      if (left < 0) left = 0;
+      var sec = Math.floor(left / 1000);
+      set('d', pad(Math.floor(sec / 86400)));
+      set('h', pad(Math.floor(sec / 3600) % 24));
+      set('m', pad(Math.floor(sec / 60) % 60));
+      set('s', pad(sec % 60));
+    }
+
+    tick();
+    var timer = setInterval(tick, 1000);
+
+    /* во вкладке в фоне таймер не нужен */
+    document.addEventListener('visibilitychange', function () {
+      if (document.hidden) {
+        clearInterval(timer);
+      } else {
+        tick();
+        timer = setInterval(tick, 1000);
+      }
+    }, false);
+  }());
+
+
+
+
+  /* ---------- плавный автоскролл после загрузки ----------
+     Ведёт гостя по приглашению сам, но отдаёт управление при первом же
+     касании: колесо, свайп, клавиши, перетаскивание полосы прокрутки. */
+  (function autoScroll() {
+    if (reduced) return;
+
+    var SPEED = 62;          /* px/сек — темп неспешного чтения */
+    var START_DELAY = 2600;  /* даём hero доиграть появление */
+    var RAMP = 900;          /* мягкий разгон, чтобы не дёрнуло с места */
+
+    var root = document.documentElement;
+    var running = false, cancelled = false;
+    var raf = 0, prevTime = 0, startTime = 0;
+    var pos = 0, expected = 0, prevBehavior = '';
+
+    function maxScroll() {
+      return Math.max(0, root.scrollHeight - window.innerHeight);
+    }
+
+    function stop() {
+      if (cancelled) return;
+      cancelled = true;
+      if (raf) { cancelAnimationFrame(raf); raf = 0; }
+      if (running) {
+        running = false;
+        root.style.scrollBehavior = prevBehavior;
+      }
+      unbind();
+    }
+
+    function step(now) {
+      if (!running) return;
+      if (!prevTime) { prevTime = now; startTime = now; }
+
+      /* ограничиваем шаг: после фриза вкладки dt был бы огромным и страницу
+         швырнуло бы вниз одним кадром */
+      var dt = Math.min(50, now - prevTime) / 1000;
+      prevTime = now;
+
+      var ramp = Math.min(1, (now - startTime) / RAMP);
+      pos += SPEED * ramp * ramp * dt;
+
+      var max = maxScroll();
+      if (pos >= max) { window.scrollTo(0, max); stop(); return; }
+
+      expected = Math.round(pos);
+      window.scrollTo(0, expected);
+      raf = requestAnimationFrame(step);
+    }
+
+    function onScroll() {
+      if (!running) {
+        /* до старта scroll может прийти от восстановления позиции браузером
+           или от нашего же scrollTo(0,0) — это не действие гостя.
+           Отменяем только если страницу реально сдвинули. */
+        if (window.pageYOffset > 8) { stop(); }
+        return;
+      }
+      /* наш собственный scrollTo тоже поднимает scroll —
+         ручной отличаем по расхождению с ожидаемой позицией */
+      if (Math.abs(window.pageYOffset - expected) > 4) { stop(); }
+    }
+
+    var passive = false;
+    try {
+      window.addEventListener('t', null, Object.defineProperty({}, 'passive', {
+        get: function () { passive = true; return true; }
+      }));
+    } catch (e) {}
+    var passiveOpt = passive ? { passive: true } : false;
+
+    function bind() {
+      window.addEventListener('wheel', stop, passiveOpt);
+      window.addEventListener('touchstart', stop, passiveOpt);
+      window.addEventListener('touchmove', stop, passiveOpt);
+      window.addEventListener('pointerdown', stop, passiveOpt);
+      window.addEventListener('keydown', stop, false);
+      window.addEventListener('scroll', onScroll, passiveOpt);
+    }
+    function unbind() {
+      window.removeEventListener('wheel', stop, passiveOpt);
+      window.removeEventListener('touchstart', stop, passiveOpt);
+      window.removeEventListener('touchmove', stop, passiveOpt);
+      window.removeEventListener('pointerdown', stop, passiveOpt);
+      window.removeEventListener('keydown', stop, false);
+      window.removeEventListener('scroll', onScroll, passiveOpt);
+      document.removeEventListener('visibilitychange', onHide, false);
+    }
+
+    function onHide() { if (document.hidden) stop(); }
+
+    function start() {
+      if (cancelled) return;
+      if (window.pageYOffset > 8) { stop(); return; }   /* гость уже листает сам */
+      if (maxScroll() < 200) { stop(); return; }
+
+      pos = window.pageYOffset;
+      expected = Math.round(pos);
+      prevTime = 0;
+      running = true;
+
+      /* html{scroll-behavior:smooth} анимировал бы каждый шаг rAF
+         и дрался бы с нашим — на время прокрутки отключаем */
+      prevBehavior = root.style.scrollBehavior;
+      root.style.scrollBehavior = 'auto';
+
+      raf = requestAnimationFrame(step);
+    }
+
+    /* Слушатели вешаем только когда конверт уже открыт: иначе клик по нему
+       сам бы и отменил прокрутку, не дав ей начаться. */
+    whenGateOpen(function () {
+      bind();
+      document.addEventListener('visibilitychange', onHide, false);
+      setTimeout(start, START_DELAY);
+    });
+  }());
+
+
+  /* ---------- максимальный размер фото в hero ----------
+     Верх арки — полукруг радиусом в половину её ширины, поэтому на высоте, где
+     стоит дата, арка заметно уже своей полной ширины. Прямоугольный зазор во всю
+     высоту (запасной вариант в CSS) резервирует лишнее — считаем точную границу.
+
+     На глубине d ниже верха арки её полуширина  h(d) = sqrt(R² - (R-d)²).
+     Нужно  h(d) <= G, где G — расстояние от центра колонки до левого края даты.
+     Отсюда  R <= (G² + d²) / 2d,  то есть ширина  W <= (G² + d²) / d.
+     В чистом CSS так не записать: calc() не умеет возводить длины в квадрат. */
+  (function heroPhotoSize() {
+    var hero  = document.getElementById('hero');
+    var shell = document.querySelector('.hero-photo-shell');
+    var dateEl = document.querySelector('.hero-date');
+    if (!hero || !shell || !dateEl) return;
+
+    var MAX = 400;        /* абсолютный потолок */
+    var W_RATIO = 0.86;   /* доля ширины экрана */
+    var H_RATIO = 0.40;   /* доля высоты — чтобы hero влезал в один экран */
+    var SAFE = 4;         /* зазор до даты */
+
+    /* Позиции берём через offsetTop/offsetLeft, а НЕ через
+       getBoundingClientRect: у фото и даты в этот момент ещё висит
+       анимация появления (translateY + scale), и rect вернул бы
+       смещённые координаты — фото получилось бы шире, чем можно. */
+    function offsetIn(el, root) {
+      var x = 0, y = 0, n = el;
+      while (n && n !== root) { x += n.offsetLeft; y += n.offsetTop; n = n.offsetParent; }
+      return { x: x, y: y };
+    }
+
+    function fit() {
+      var col = hero.clientWidth;
+      if (!col) return;
+
+      var datePos = offsetIn(dateEl, hero);
+      var shellTop = offsetIn(shell, hero).y;
+
+      /* G — место от центра колонки до левого края даты */
+      var G = datePos.x - col / 2 - SAFE;
+      /* d — насколько низ даты опущен относительно верха арки */
+      var d = (datePos.y + dateEl.offsetHeight) - shellTop;
+
+      var limit = Infinity;
+      if (G <= 0) {
+        limit = 0;                       /* места нет вовсе */
+      } else if (d > 0) {
+        limit = (G * G + d * d) / d;     /* касание окружности арки */
+      }                                   /* d <= 0 — дата выше арки, не мешает */
+
+      var w = Math.min(
+        MAX,
+        window.innerWidth * W_RATIO,
+        window.innerHeight * H_RATIO,
+        col - 8,
+        limit
+      );
+      if (!(w > 0)) return;
+
+      hero.style.setProperty('--photo-w', Math.floor(w) + 'px');
+    }
+
+    /* ширина фото не влияет на положение даты (она прижата к правому краю),
+       поэтому пересчёт не зацикливается */
+    fit();
+
+    var t = 0;
+    window.addEventListener('resize', function () {
+      clearTimeout(t);
+      t = setTimeout(fit, 150);
+    }, false);
+    window.addEventListener('orientationchange', function () {
+      setTimeout(fit, 300);
+    }, false);
+
+    if (document.fonts && document.fonts.ready && document.fonts.ready.then) {
+      document.fonts.ready.then(fit)['catch'](function () {});
+    }
+  }());
+
+
+  /* ---------- конверт ---------- */
+  (function gate() {
+    var gate = document.getElementById('gate');
+    var btn = document.getElementById('envelopeBtn');
+    var root = document.documentElement;
+
+    /* без JS класса .js не будет, конверт скрыт и приглашение открыто сразу */
+    if (!gate || !btn) { root.className = root.className.replace(/\bis-locked\b/, ''); return; }
+
+    var opened = false;
+
+    /* длительности держим в JS в согласии с CSS: клапан .85s,
+       письмо .5s задержки + 1s, затем уводим сам экран */
+    var OPEN_TIME = reduced ? 0 : 1000;   /* столько длится раскрытие */
+    var FADE = reduced ? 260 : 560;
+
+    function open() {
+      if (opened) return;
+      opened = true;
+
+      btn.classList.add('is-opening');
+      gate.classList.add('is-opening');
+      btn.setAttribute('aria-expanded', 'true');
+
+      /* музыку запускаем немедленно — мы всё ещё внутри обработчика клика,
+         активация действует только синхронно */
+      fireGateOpen();
+
+      setTimeout(function () {
+        gate.classList.add('is-open');
+
+        /* снимаем блокировку прокрутки и отпускаем анимации появления hero */
+        root.className = root.className.replace(/\bis-locked\b/, '');
+        window.scrollTo(0, 0);
+
+        setTimeout(function () {
+          if (gate.parentNode) { gate.parentNode.removeChild(gate); }
+        }, FADE + 60);
+      }, OPEN_TIME);
+    }
+
+    btn.addEventListener('click', open, false);
+    /* фокус программно не ставим: в части браузеров это включает
+       :focus-visible и вокруг конверта повисает кольцо фокуса.
+       Кнопка и так первая в порядке обхода — Tab доводит до неё сразу. */
+  }());
+
+}());
+</script>
+
+</body>
+</html>
