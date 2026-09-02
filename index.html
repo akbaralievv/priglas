@@ -4,6 +4,10 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#fbf4ee">
+<!-- Приглашение свёрстано только в светлых тонах. Без этой строки Samsung
+     Internet, Chrome и Edge применяют принудительную тёмную тему: инвертируют
+     кремовую бумагу в чёрную, а бордовый текст — в блёклый розовый. -->
+<meta name="color-scheme" content="only light">
 <meta name="description" content="Айчүрөктүн кыз узатуу тою. 22-сентябрь, 2026-жыл, саат 17:00. «Хан Сарай Гранд Холл» рестораны, Манас шаары.">
 <title>Айчүрөк — Кыз узатуу</title>
 
@@ -99,6 +103,8 @@ try {
 *,*::before,*::after{ -webkit-box-sizing:border-box; box-sizing:border-box; }
 
 html{
+  /* дублируем в CSS: часть браузеров читает только это свойство */
+  color-scheme:only light;
   -webkit-font-smoothing:antialiased;
   -moz-osx-font-smoothing:grayscale;
   -webkit-text-size-adjust:100%;
@@ -293,7 +299,10 @@ img{ display:block; max-width:100%; border:0; }
   margin:0;
   font-family:var(--font-script);
   font-weight:400;
-  font-size:clamp(68px,21.5vw,100px);
+  /* нижний предел был 68px: на реальных телефонах он не срабатывает
+     (21.5vw обгоняет его уже при 316px), а при зуме упирался в него —
+     имя занимало треть экрана и зрительно съедало фото */
+  font-size:clamp(40px,21.5vw,100px);
   line-height:1;
   color:var(--wine);
   text-shadow:0 10px 30px rgba(122,37,55,.12);
@@ -516,9 +525,14 @@ img{ display:block; max-width:100%; border:0; }
   border-radius:30px;
   -webkit-box-shadow:var(--shadow-card);
   box-shadow:var(--shadow-card);
+  text-align:center;
+}
+/* Размытие подложки — самая дорогая операция на слабых Android.
+   Держим его только там, где за карточкой действительно есть снимок;
+   на обычной бумаге оно ничего не меняет, но кадры съедает. */
+.section--photo .section-card{
   -webkit-backdrop-filter:blur(10px);
   backdrop-filter:blur(10px);
-  text-align:center;
 }
 
 .section-label{
@@ -729,26 +743,26 @@ img{ display:block; max-width:100%; border:0; }
   display:-webkit-inline-box; display:-ms-inline-flexbox; display:inline-flex;
   -webkit-box-align:center; -ms-flex-align:center; align-items:center;
   -webkit-box-pack:center; -ms-flex-pack:center; justify-content:center;
-  margin-top:18px;
-  padding:14px 32px;
+  margin-top:16px;
+  padding:13px 22px;
   border-radius:999px;
   background:-webkit-gradient(linear,left top,right bottom,from(#7a2537),to(#571424));
   background:linear-gradient(135deg,var(--wine),var(--wine-deep));
   color:#fff;
   text-decoration:none;
   font-family:var(--font-serif);
-  font-size:13px;
+  font-size:12px;
   font-weight:600;
-  letter-spacing:.22em;
-  text-indent:.22em;
+  letter-spacing:.16em;
+  text-indent:.16em;
   text-transform:uppercase;
-  -webkit-box-shadow:0 16px 30px rgba(87,20,36,.18);
-  box-shadow:0 16px 30px rgba(87,20,36,.18);
-  -webkit-transition:-webkit-transform .25s var(--ease);
-  transition:transform .25s var(--ease);
+  -webkit-box-shadow:0 10px 22px rgba(87,20,36,.22);
+  box-shadow:0 8px 18px rgba(87,20,36,.2);
+  -webkit-transition:-webkit-transform .2s var(--ease);
+  transition:transform .2s var(--ease);
   -webkit-tap-highlight-color:transparent;
 }
-.map-btn:active{ -webkit-transform:scale(.97); transform:scale(.97); }
+.map-btn:active{ -webkit-transform:scale(.96); transform:scale(.96); }
 .map-btn:focus-visible{ outline:2px solid var(--gold); outline-offset:3px; }
 
 /* ---- той ээлери ---- */
@@ -951,12 +965,14 @@ img{ display:block; max-width:100%; border:0; }
 }
 .section--location .location-detail{ margin-top:8px; font-size:16px; }
 .section--location .pin-badge{ width:48px; height:48px; margin-top:20px; }
-.section--location .map-btn{
-  margin-top:14px;
-  padding:13px clamp(14px,4.6vw,26px);
-  font-size:12px;
-  letter-spacing:.14em;
-  text-indent:.14em;
+
+/* Ниже 300px реальных устройств нет — сюда попадаем только при зуме.
+   К этому моменту полы clamp() упираются, и колонка даты съедает половину
+   ширины. Дата дублируется строкой под именем, поэтому убираем её
+   и отдаём всю ширину фото. */
+@media (max-width:300px){
+  .hero-date{ display:none; }
+  .hero{ --date-w:0px; --date-x:0px; }
 }
 
 @media (max-width:340px){
@@ -1188,6 +1204,26 @@ html:not(.js) .section--photo-date{ --photo:url("assets/PHOTO-2026-09-02-16-29-1
   .env:active{ -webkit-filter:none; filter:none }
 }
 
+
+/* ============================================================
+   ПРИНУДИТЕЛЬНЫЕ ТЕМЫ БРАУЗЕРОВ
+   ============================================================ */
+
+/* Режим высокой контрастности Windows: система подменяет цвета сама,
+   фоновые картинки при этом пропадают — оставляем читаемый текст. */
+@media (forced-colors:active){
+  .section-card, .calendar-card, .countdown-unit{
+    border:1px solid CanvasText;
+  }
+  .map-btn, .music{
+    border:1px solid ButtonText;
+    forced-color-adjust:none;
+  }
+  .ornament-strip, .section--photo::before, .section--photo::after{
+    display:none;
+  }
+}
+
 </style>
 </head>
 
@@ -1349,10 +1385,16 @@ html:not(.js) .section--photo-date{ --photo:url("assets/PHOTO-2026-09-02-16-29-1
         </svg>
       </div>
 
+      <!-- «Хан-Сарай», Манас: 40.961955, 72.9907826
+           В href — обычная https-ссылка: она работает везде и её видят
+           краулеры. На Android скрипт подменяет её на geo:, потому что
+           только эта схема заставляет систему показать выбор приложения
+           (2ГИС, Google Карты, Яндекс). У https-ссылок Android открывает
+           приложение сразу, без выбора. -->
       <div>
-        <!-- «Хан-Сарай», Манас: 40.961955, 72.9907826 -->
-        <a class="map-btn" id="mapBtn" target="_blank" rel="noopener noreferrer"
-           href="https://www.google.com/maps/search/%D0%A5%D0%B0%D0%BD-%D0%A1%D0%B0%D1%80%D0%B0%D0%B9/@40.961955,72.9907826,18z">Картадан кароо</a>
+        <a class="map-btn" id="mapBtn"
+           href="https://www.google.com/maps/search/%D0%A5%D0%B0%D0%BD-%D0%A1%D0%B0%D1%80%D0%B0%D0%B9/@40.961955,72.9907826,18z"
+           target="_blank" rel="noopener noreferrer">Картадан кароо</a>
       </div>
     </div>
   </section>
@@ -1408,7 +1450,10 @@ html:not(.js) .section--photo-date{ --photo:url("assets/PHOTO-2026-09-02-16-29-1
     var box = document.getElementById('petals');
     if (!box || reduced) return;
 
-    var count = window.innerWidth < 600 ? 26 : 36;
+    /* на слабых телефонах число ядер обычно 4 и меньше — там уменьшаем
+       количество лепестков, чтобы прокрутка оставалась гладкой */
+    var weak = (navigator.hardwareConcurrency || 8) <= 4;
+    var count = window.innerWidth < 600 ? (weak ? 12 : 26) : (weak ? 18 : 36);
     var frag = document.createDocumentFragment();
 
     for (var i = 0; i < count; i++) {
@@ -1454,7 +1499,20 @@ html:not(.js) .section--photo-date{ --photo:url("assets/PHOTO-2026-09-02-16-29-1
 
     var ready = false, wanted = false;
 
-    audio.addEventListener('error', function () { btn.hidden = true; }, true);
+    /* <source> выбирается один раз при загрузке: если выбранный формат
+       потом отвалится, сам браузер на второй не переключится. Делаем это
+       вручную — и только если запасной ещё не пробовали. */
+    var triedFallback = false;
+    audio.addEventListener('error', function () {
+      if (!triedFallback && audio.currentSrc.indexOf('music.mp3') === -1) {
+        triedFallback = true;
+        audio.src = 'assets/music.mp3';
+        audio.load();
+        if (wanted) { play(); }
+        return;
+      }
+      btn.hidden = true;
+    }, true);
     audio.addEventListener('loadedmetadata', function () { ready = true; }, false);
     audio.addEventListener('canplay', function () { ready = true; }, false);
 
@@ -1854,7 +1912,9 @@ html:not(.js) .section--photo-date{ --photo:url("assets/PHOTO-2026-09-02-16-29-1
         col - 8,
         limit
       );
-      if (!(w > 0)) return;
+      /* дата скрыта или места нет — снимаем инлайн-значение, иначе
+         осталась бы ширина, посчитанная для широкого экрана */
+      if (!(w > 0)) { hero.style.removeProperty('--photo-w'); return; }
 
       hero.style.setProperty('--photo-w', Math.floor(w) + 'px');
     }
@@ -1923,6 +1983,31 @@ html:not(.js) .section--photo-date{ --photo:url("assets/PHOTO-2026-09-02-16-29-1
     /* фокус программно не ставим: в части браузеров это включает
        :focus-visible и вокруг конверта повисает кольцо фокуса.
        Кнопка и так первая в порядке обхода — Tab доводит до неё сразу. */
+  }());
+
+
+  /* ---------- выбор приложения для карты ----------
+     Обычная https-ссылка на Android открывает приложение сразу (App Links) —
+     системного «Открыть с помощью» не будет. Выбор даёт только схема geo:,
+     на неё подписаны и 2ГИС, и Google Карты, и Яндекс.
+     На iOS выбора приложений нет в принципе, там ведём в Apple Карты —
+     они есть на каждом устройстве. Везде остальном — исходная https-ссылка. */
+  (function mapLink() {
+    var link = document.getElementById('mapBtn');
+    if (!link) return;
+
+    var LAT = '40.961955', LON = '72.9907826', NAME = 'Хан-Сарай';
+    var ua = navigator.userAgent || '';
+
+    if (/android/i.test(ua)) {
+      link.href = 'geo:' + LAT + ',' + LON +
+                  '?q=' + LAT + ',' + LON + '(' + encodeURIComponent(NAME) + ')';
+      link.removeAttribute('target');      /* иначе часть браузеров теряет схему */
+    } else if (/iPad|iPhone|iPod/.test(ua) ||
+               (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1)) {
+      link.href = 'https://maps.apple.com/?ll=' + LAT + ',' + LON +
+                  '&z=18&q=' + encodeURIComponent(NAME);
+    }
   }());
 
 }());
