@@ -484,7 +484,7 @@ img{ display:block; max-width:100%; border:0; }
   position:fixed;
   top:0; bottom:0;
   left:50%;
-  width:min(480px,100%);
+  width:min(500px,100%);
   -webkit-transform:translateX(-50%);
   transform:translateX(-50%);
   z-index:4;
@@ -537,6 +537,10 @@ img{ display:block; max-width:100%; border:0; }
   top:16px;
   top:calc(16px + env(safe-area-inset-top));
   z-index:60;
+  /* появляется вместе с лендингом: на широком экране кнопка оказывается
+     сбоку от колонки конверта и иначе торчала бы поверх закрытых ворот */
+  -webkit-transition:opacity .4s var(--ease);
+  transition:opacity .4s var(--ease);
   width:44px; height:44px;
   padding:0;
   border:1px solid var(--line);
@@ -1133,14 +1137,14 @@ html:not(.js) .section--photo-date{ --photo:url("assets/PHOTO-2026-09-02-16-29-1
   /* Габариты экрана держим в переменных: в calc() нельзя сослаться на ширину
      родителя из свойства height (проценты там считаются от высоты), поэтому
      обе стороны конверта выражаем через одну пару значений. */
-  --gw:min(100vw,480px);
+  --gw:min(100vw,500px);
   --gh:100vh;
 
   display:block;
   position:fixed;
   top:0; bottom:0;
   left:50%;
-  width:min(100vw,480px);
+  width:min(100vw,500px);
   -webkit-transform:translateX(-50%);
   transform:translateX(-50%);
   z-index:200;
@@ -1148,8 +1152,11 @@ html:not(.js) .section--photo-date{ --photo:url("assets/PHOTO-2026-09-02-16-29-1
   -webkit-transition:opacity .46s var(--ease), -webkit-transform .46s var(--ease);
   transition:opacity .46s var(--ease), transform .46s var(--ease);
 }
-@supports (height:1svh){
-  .js .gate{ --gh:100svh; }
+@supports (height:1lvh){
+  /* lvh — высота окна со спрятанной адресной строкой, то есть максимальная.
+     C 100svh конверт оставлял кремовые полосы сверху и снизу в тот момент,
+     когда строка браузера уезжала и окно становилось выше. */
+  .js .gate{ --gh:100lvh; }
 }
 /* подложка отдельным слоем, чтобы гасить её раньше самого конверта */
 .js .gate::before{
@@ -1170,6 +1177,7 @@ html:not(.js) .section--photo-date{ --photo:url("assets/PHOTO-2026-09-02-16-29-1
    стартового экрана, когда он меняет прозрачность и масштаб. */
 .is-locked{ background:#f4e7db; }
 .is-locked, .is-locked body{ overflow:hidden; height:100%; }
+.is-locked .music{ opacity:0; pointer-events:none; }
 
 /* и не проигрывает своё появление раньше времени */
 .is-locked .reveal,
@@ -1227,8 +1235,6 @@ html:not(.js) .section--photo-date{ --photo:url("assets/PHOTO-2026-09-02-16-29-1
   background-image:url("assets/gate-envelope.jpg");
   background-size:100% 100%;
   background-repeat:no-repeat;
-  -webkit-box-shadow:0 24px 60px -30px rgba(87,20,36,.45);
-  box-shadow:0 24px 60px -30px rgba(87,20,36,.45);
 }
 .js-webp .env__layer{ background-image:url("assets/gate-envelope.webp"); }
 
@@ -1269,14 +1275,25 @@ html:not(.js) .section--photo-date{ --photo:url("assets/PHOTO-2026-09-02-16-29-1
 /* нижняя часть — карман */
 .env__pocket{
   z-index:3;
-  -webkit-clip-path:polygon(0 40.2%, 50% 58.7%, 100% 40.2%, 100% 100%, 0 100%);
-  clip-path:polygon(0 40.2%, 50% 58.7%, 100% 40.2%, 100% 100%, 0 100%);
+  /* только нижние 59.8% конверта: 40.2% — линия золотых лент */
+  top:40.2%;
+  height:59.8%;
+  background-size:100% 167.224%;   /* 100 / 0.598 — картинка снова во весь конверт */
+  background-position:0 100%;      /* низом к низу, верх картинки уходит за край */
+  -webkit-clip-path:polygon(0 0, 50% 30.94%, 100% 0, 100% 100%, 0 100%);
+  clip-path:polygon(0 0, 50% 30.94%, 100% 0, 100% 100%, 0 100%);
 }
 /* верхняя — клапан, откидывается от верхней кромки */
 .env__flap{
   z-index:4;
-  -webkit-clip-path:polygon(0 0, 100% 0, 100% 40.2%, 50% 58.7%, 0 40.2%);
-  clip-path:polygon(0 0, 100% 0, 100% 40.2%, 50% 58.7%, 0 40.2%);
+  /* только верхние 58.7% — ниже у клапана всё равно пусто. Это
+     единственный слой, который крутится в 3D, поэтому его площадь
+     напрямую бьёт по слабым видеочипам. */
+  height:58.7%;
+  background-size:100% 170.357%;   /* 100 / 0.587 */
+  background-position:0 0;
+  -webkit-clip-path:polygon(0 0, 100% 0, 100% 68.48%, 50% 100%, 0 68.48%);
+  clip-path:polygon(0 0, 100% 0, 100% 68.48%, 50% 100%, 0 68.48%);
   -webkit-transform-origin:50% 0;
   transform-origin:50% 0;
 }
@@ -1410,7 +1427,7 @@ html:not(.js) .section--photo-date{ --photo:url("assets/PHOTO-2026-09-02-16-29-1
   content:'';
   position:absolute;
   left:0; right:0; top:0;
-  height:62%;
+  height:36.5%;                    /* (62 - 40.2) / 59.8 — карман теперь с 40.2% */
   opacity:0;
   background:-webkit-gradient(linear,left top,left bottom,from(rgba(87,20,36,.42)),to(rgba(87,20,36,0)));
   background:linear-gradient(180deg,rgba(87,20,36,.42),rgba(87,20,36,0));
