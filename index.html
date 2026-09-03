@@ -501,7 +501,10 @@ img{ display:block; max-width:100%; border:0; }
   opacity:0;
   -webkit-animation:fall linear infinite;
   animation:fall linear infinite;
-  will-change:transform,opacity;
+  /* will-change тут не нужен: браузер и так выносит на композитор элемент
+     с бегущей анимацией transform/opacity. А вот держал он эти 26 слоёв
+     ПОСТОЯННО — даже пока лепестки стоят на паузе под закрытым конвертом,
+     то есть ровно в момент самой тяжёлой анимации раскрытия. */
 }
 .petals i:nth-child(2n){
   background:-webkit-gradient(linear,left top,right bottom,from(rgba(215,190,147,.9)),to(rgba(183,138,82,.3)));
@@ -538,9 +541,7 @@ img{ display:block; max-width:100%; border:0; }
   padding:0;
   border:1px solid var(--line);
   border-radius:50%;
-  background:rgba(255,250,246,.78);
-  -webkit-backdrop-filter:blur(8px);
-  backdrop-filter:blur(8px);
+  background:rgba(255,250,246,.9);
   color:var(--wine);
   cursor:pointer;
   display:-webkit-box; display:-ms-flexbox; display:flex;
@@ -663,11 +664,6 @@ img{ display:block; max-width:100%; border:0; }
 /* Размытие подложки — самая дорогая операция на слабых Android.
    Держим его только там, где за карточкой действительно есть снимок;
    на обычной бумаге оно ничего не меняет, но кадры съедает. */
-.section--photo .section-card{
-  -webkit-backdrop-filter:blur(10px);
-  backdrop-filter:blur(10px);
-}
-
 .section-label{
   margin:0;
   font-size:12px;
@@ -1149,9 +1145,6 @@ html:not(.js) .section--photo-date{ --photo:url("assets/PHOTO-2026-09-02-16-29-1
   transform:translateX(-50%);
   z-index:200;
   overflow:hidden;                 /* лишнее от cover-размера обрезается здесь */
-  /* заливаем поля вокруг колонки на широком экране */
-  -webkit-box-shadow:0 0 0 100vmax #f4e7db;
-  box-shadow:0 0 0 100vmax #f4e7db;
   -webkit-transition:opacity .46s var(--ease), -webkit-transform .46s var(--ease);
   transition:opacity .46s var(--ease), transform .46s var(--ease);
 }
@@ -1171,11 +1164,19 @@ html:not(.js) .section--photo-date{ --photo:url("assets/PHOTO-2026-09-02-16-29-1
 .gate.is-opening::before{ opacity:0; }
 
 /* пока конверт закрыт — страница под ним не листается */
+/* Поля вокруг колонки заливаем фоном документа. Раньше тут была тень
+   box-shadow:0 0 0 100vmax — она заставляла браузер держать и перерисовывать
+   область в тысячи пикселей вокруг экрана, и всё это ещё раз при уходе
+   стартового экрана, когда он меняет прозрачность и масштаб. */
+.is-locked{ background:#f4e7db; }
 .is-locked, .is-locked body{ overflow:hidden; height:100%; }
 
 /* и не проигрывает своё появление раньше времени */
 .is-locked .reveal,
-.is-locked .hero-photo-reveal{
+.is-locked .hero-photo-reveal,
+/* лепестки под закрытым конвертом не видны, но композитор всё равно
+   пересобирал бы 26 слоёв на каждом кадре раскрытия */
+.is-locked .petals i{
   -webkit-animation-play-state:paused; animation-play-state:paused;
 }
 
@@ -1230,11 +1231,6 @@ html:not(.js) .section--photo-date{ --photo:url("assets/PHOTO-2026-09-02-16-29-1
   box-shadow:0 24px 60px -30px rgba(87,20,36,.45);
 }
 .js-webp .env__layer{ background-image:url("assets/gate-envelope.webp"); }
-.js-webp .env__flap::after{
-  background-image:
-    linear-gradient(180deg, rgba(198,150,88,.62), rgba(150,104,58,.72)),
-    url("assets/gate-envelope.webp");
-}
 
 
 /* Внутренность конверта. Поворачиваясь, клапан укорачивается по вертикали —
@@ -1246,17 +1242,10 @@ html:not(.js) .section--photo-date{ --photo:url("assets/PHOTO-2026-09-02-16-29-1
   inset:0;
   z-index:1;
   background:-webkit-gradient(linear,left top,left bottom,from(#d8c3aa),color-stop(18%,#e6d3bd),color-stop(55%,#f0e2d2),to(#f6ecdf));
-  background:linear-gradient(180deg,#d8c3aa 0%,#e6d3bd 18%,#f0e2d2 55%,#f6ecdf 100%);
+  /* затемнение у сгиба вписано прямо сюда — отдельный слой не нужен */
+  background:linear-gradient(180deg,#b99b78 0%,#d8c3aa 12%,#e6d3bd 30%,#f0e2d2 60%,#f6ecdf 100%);
 }
-/* у самого сгиба глубже и темнее — там бумага уходит внутрь */
-.env__inside::before{
-  content:'';
-  position:absolute;
-  left:0; right:0; top:0;
-  height:46%;
-  background:-webkit-gradient(linear,left top,left bottom,from(rgba(87,20,36,.28)),to(rgba(87,20,36,0)));
-  background:linear-gradient(180deg,rgba(87,20,36,.28),rgba(87,20,36,0));
-}
+
 
 /* Подкладка непрозрачна — иначе щель не закрыть. Но к концу она бы заслонила
    приглашение, поэтому уходит вместе с карманом, в такт его отъезду. */
@@ -1338,28 +1327,50 @@ html:not(.js) .section--photo-date{ --photo:url("assets/PHOTO-2026-09-02-16-29-1
   animation:sealWave .9s cubic-bezier(.22,.9,.3,1) forwards;
 }
 /* Печать не просто гаснет: сначала она вдавлена (её только что нажали),
-   потом отпускает — короткий отскок — и от неё расходится волна. */
+   потом отпускает — короткий отскок — и от неё расходится волна.
+   Волну рисуем отдельным кольцом через transform: раньше тут был растущий
+   box-shadow, а его композитор ускорять не умеет — браузер перерисовывал
+   кольцо на каждом кадре. */
+.env__fx::after{
+  content:'';
+  position:absolute;
+  inset:0;
+  border-radius:50%;
+  border:2px solid rgba(122,37,55,.36);
+  opacity:0;
+}
+.env.is-opening .env__fx::after{
+  -webkit-animation:sealRing .9s cubic-bezier(.22,.9,.3,1) forwards;
+  animation:sealRing .9s cubic-bezier(.22,.9,.3,1) forwards;
+}
+@-webkit-keyframes sealRing{
+  0%{ -webkit-transform:scale(1); opacity:.8 } 100%{ -webkit-transform:scale(2.6); opacity:0 }
+}
+@keyframes sealRing{
+  0%{ transform:scale(1); opacity:.8 } 100%{ transform:scale(2.6); opacity:0 }
+}
 @-webkit-keyframes sealWave{
-  0%   { -webkit-transform:scale(.88); -webkit-box-shadow:0 0 0 0 rgba(122,37,55,.36); opacity:1 }
+  0%   { -webkit-transform:scale(.88); opacity:1 }
   16%  { -webkit-transform:scale(1.035) }
   30%  { -webkit-transform:scale(1) }
-  100% { -webkit-transform:scale(1); -webkit-box-shadow:0 0 0 66px rgba(122,37,55,0); opacity:0 }
+  100% { -webkit-transform:scale(1); opacity:0 }
 }
 @keyframes sealWave{
-  0%   { transform:scale(.88); box-shadow:0 0 0 0 rgba(122,37,55,.36); opacity:1 }
+  0%   { transform:scale(.88); opacity:1 }
   16%  { transform:scale(1.035) }
   30%  { transform:scale(1) }
-  100% { transform:scale(1); box-shadow:0 0 0 66px rgba(122,37,55,0); opacity:0 }
+  100% { transform:scale(1); opacity:0 }
 }
 
 /* Слои под анимацию готовим заранее — ещё пока палец на печати. Если ставить
    will-change одновременно со стартом, браузер не успевает вынести слой на
    композитор, и первые кадры проседают. Держим подсказку только на время
    нажатия и раскрытия, чтобы не занимать память впустую. */
+/* Подсказку даём только клапану: он один вращается в 3D и требует
+   заранее собранного слоя. Карман просто едет вниз — обычный transform,
+   лишняя текстура во весь экран на слабом телефоне дороже выгоды. */
 .env:active .env__flap,
-.env:active .env__pocket,
-.env.is-opening .env__flap,
-.env.is-opening .env__pocket{
+.env.is-opening .env__flap{
   will-change:transform, opacity;
 }
 
@@ -1374,37 +1385,20 @@ html:not(.js) .section--photo-date{ --photo:url("assets/PHOTO-2026-09-02-16-29-1
   animation:gateFlap .85s cubic-bezier(.34,.02,.24,1) .06s forwards;
 }
 
-/* затенение: чем сильнее клапан отвёрнут, тем меньше на него падает света */
-.env__flap::before{
-  content:'';
-  position:absolute;
-  inset:0;
-  opacity:0;
-  background:-webkit-gradient(linear,left top,left bottom,from(rgba(87,20,36,.10)),to(rgba(87,20,36,.34)));
-  background:linear-gradient(180deg,rgba(87,20,36,.10),rgba(87,20,36,.34));
-}
-/* изнанка: за вертикалью мы видим уже не лицо конверта, а его подкладку,
-   поэтому узор плавно уступает место чистой бумаге */
+/* Затенение и изнанка — ОДИН слой вместо двух. Раньше их было два, и на
+   верхнем стоял background-blend-mode поверх фотографии: блендинг сбивает
+   быстрый путь композитора, а слой в этот момент ещё и вращается в 3D —
+   на мобильных GPU это самое дорогое место всей анимации.
+   Теперь это простой градиент: цвет подкладки конверта с затемнением к сгибу. */
 .env__flap::after{
   content:'';
   position:absolute;
   inset:0;
   opacity:0;
-  /* Подкладка клапана на референсе — узорная, в золоте. Берём тот же снимок
-     и тонируем: рисунок проступает, но читается как изнанка, а не как лицо. */
-  background:
-    -webkit-gradient(linear,left top,left bottom,from(rgba(198,150,88,.62)),to(rgba(150,104,58,.72))),
-    url("assets/gate-envelope.jpg") center/100% 100% no-repeat;
-  background:
-    linear-gradient(180deg, rgba(198,150,88,.62), rgba(150,104,58,.72)),
-    url("assets/gate-envelope.jpg") center/100% 100% no-repeat;
-  background-blend-mode:multiply, normal;
+  background:-webkit-gradient(linear,left top,left bottom,from(#e7d4bd),color-stop(55%,#dcc6ab),to(#cbb191));
+  background:linear-gradient(180deg,#e7d4bd 0%,#dcc6ab 55%,#cbb191 100%);
   -webkit-box-shadow:inset 0 -18px 30px -18px rgba(87,20,36,.32);
   box-shadow:inset 0 -18px 30px -18px rgba(87,20,36,.32);
-}
-.env.is-opening .env__flap::before{
-  -webkit-animation:flapShade .85s cubic-bezier(.34,.02,.24,1) .06s forwards;
-  animation:flapShade .85s cubic-bezier(.34,.02,.24,1) .06s forwards;
 }
 .env.is-opening .env__flap::after{
   -webkit-animation:flapInner .85s cubic-bezier(.34,.02,.24,1) .06s forwards;
@@ -1440,12 +1434,9 @@ html:not(.js) .section--photo-date{ --photo:url("assets/PHOTO-2026-09-02-16-29-1
   100%{ transform:rotateX(-118deg) }
 }
 
-@-webkit-keyframes flapShade{ 0%{opacity:0} 46%{opacity:1} 100%{opacity:.55} }
-@keyframes flapShade{ 0%{opacity:0} 46%{opacity:1} 100%{opacity:.55} }
-
 /* переключение на изнанку — вокруг вертикали, то есть примерно на середине хода */
-@-webkit-keyframes flapInner{ 0%,42%{opacity:0} 56%,100%{opacity:1} }
-@keyframes flapInner{ 0%,42%{opacity:0} 56%,100%{opacity:1} }
+@-webkit-keyframes flapInner{ 0%{opacity:0} 30%{opacity:.5} 56%,100%{opacity:1} }
+@keyframes flapInner{ 0%{opacity:0} 30%{opacity:.5} 56%,100%{opacity:1} }
 
 /* тень нарастает, пока клапан над карманом, и уходит, когда он поднялся */
 @-webkit-keyframes flapCast{ 0%{opacity:0} 30%{opacity:1} 72%{opacity:.35} 100%{opacity:0} }
