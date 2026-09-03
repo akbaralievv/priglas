@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ky">
+<html lang="ky-KG" translate="no">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
@@ -8,6 +8,13 @@
      Internet, Chrome и Edge применяют принудительную тёмную тему: инвертируют
      кремовую бумагу в чёрную, а бордовый текст — в блёклый розовый. -->
 <meta name="color-scheme" content="only light">
+
+<!-- Автоперевод ломает приглашение: «секунд» становится «ВТОРОЙ», «күн» —
+     «ОДИН ДЕНЬ», сокращения дней недели (Дүй, Шей, Шар...) превращаются
+     в «ЗЕМЛЯ ШЕЙ СРЕДА ЗАЛИВ» и вылезают за края ячеек. Кыргызский для
+     машинного перевода слишком редкий. Запрещаем перевод целиком:
+     translate="no" на <html> — стандарт HTML5, meta — для Google Переводчика. -->
+<meta name="google" content="notranslate">
 <meta name="description" content="Айчүрөктүн кыз узатуу тою. 22-сентябрь, 2026-жыл, саат 17:00. «Хан Сарай Гранд Холл» рестораны, Манас шаары.">
 <title>Айчүрөк — Кыз узатуу</title>
 
@@ -191,10 +198,10 @@ try {
 
   --wine:#7a2537;
   --wine-deep:#571424;
-  --wine-soft:#a55d6f;
+  --wine-soft:#a1596b;
 
   --text:#542430;
-  --text-soft:#8f6770;
+  --text-soft:#8c646d;
 
   --gold:#b78a52;
   --gold-soft:#d7be93;
@@ -663,8 +670,8 @@ img{ display:block; max-width:100%; border:0; }
 
 .section-label{
   margin:0;
-  font-size:11px;
-  font-weight:500;
+  font-size:12px;
+  font-weight:700;
   letter-spacing:.34em;
   text-indent:.34em;
   text-transform:uppercase;
@@ -697,18 +704,17 @@ img{ display:block; max-width:100%; border:0; }
   background:-webkit-gradient(linear,left top,right top,from(transparent),color-stop(50%,#b78a52),to(transparent));
   background:linear-gradient(90deg,transparent,var(--gold),transparent);
 }
-.divider-dot{
-  width:7px; height:7px;
-  margin:0 auto;
-  border-radius:50%;
-  background:var(--gold);
-}
 
+/* Готовый золотой разделитель вместо нарисованного мной SVG. */
 .ornament-divider{
-  width:min(180px,62%);
-  height:22px;
+  width:min(210px,72%);
+  aspect-ratio:883/86;
   margin:26px auto;
-  background:url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='18' viewBox='0 0 120 18'%3E%3Cg fill='none' stroke='%23b78a52' stroke-width='1' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M2 9H40M80 9H118' stroke-opacity='.55'/%3E%3Cpath d='M60 3.5l5.5 5.5-5.5 5.5-5.5-5.5z'/%3E%3Cpath d='M40 9c0-3.2 3-5.2 5.8-4.1 2.4 1 2.2 4-.5 4.1'/%3E%3Cpath d='M40 9c0 3.2 3 5.2 5.8 4.1 2.4-1 2.2-4-.5-4.1'/%3E%3Cpath d='M80 9c0-3.2-3-5.2-5.8-4.1-2.4 1-2.2 4 .5 4.1'/%3E%3Cpath d='M80 9c0 3.2-3 5.2-5.8 4.1-2.4-1-2.2-4 .5-4.1'/%3E%3C/g%3E%3Cg fill='%237a2537' fill-opacity='.5'%3E%3Ccircle cx='60' cy='9' r='1.5'/%3E%3C/g%3E%3C/svg%3E") center/contain no-repeat;
+  background:url("assets/ornament2-use.png") center/contain no-repeat;
+}
+.js-webp .ornament-divider{ background-image:url("assets/ornament2.webp"); }
+@supports not (aspect-ratio:1/1){
+  .ornament-divider{ height:0; padding-bottom:9.7%; }
 }
 
 /* ---- чакыруу ---- */
@@ -913,8 +919,8 @@ img{ display:block; max-width:100%; border:0; }
 
 /* ---- подвал ---- */
 .footer{
-  padding:20px 28px 64px;
-  padding-bottom:calc(64px + env(safe-area-inset-bottom));
+  padding:20px 28px 38px;
+  padding-bottom:calc(38px + env(safe-area-inset-bottom));
   text-align:center;
 }
 .footer-line{
@@ -1059,23 +1065,33 @@ img{ display:block; max-width:100%; border:0; }
   padding-left:clamp(10px,3vw,20px);
 }
 
+/* Снимок — вырезка с прозрачным фоном: рамка, маска и тень не нужны,
+   он сам растворяется в фон со всех сторон.
+   Подключается ФОНОМ и только после открытия конверта. Раньше это был
+   <img loading="lazy">, но ленивая загрузка не срабатывала: пока стартовый
+   экран держит страницу в overflow:hidden, браузер считает, что весь документ
+   рядом с окном, и тянул все 89 КБ в критический путь — ради картинки,
+   до которой гость доберётся секунд через двадцать. */
 .location-figure{
   -webkit-box-flex:0; -ms-flex:0 0 auto; flex:0 0 auto;
   -ms-flex-item-align:end; align-self:flex-end;
   pointer-events:none;
   -webkit-user-select:none; -moz-user-select:none; user-select:none;
-}
-/* Снимок — вырезка с прозрачным фоном (assets/portrait-cut.webp),
-   поэтому здесь не нужны ни рамка, ни mask-image, ни тень — снимок сам
-   растворяется в фон со всех сторон и одинаково выглядит в любом браузере. */
-.location-figure{
   --loc-h:clamp(300px,115vw,450px);
-}
-.location-figure img{
+  aspect-ratio:420/1277;
   height:var(--loc-h);
   width:auto;
-  display:block;
+  background-repeat:no-repeat;
+  background-position:center bottom;
+  background-size:contain;
 }
+@supports not (aspect-ratio:1/1){
+  .location-figure{ width:calc(var(--loc-h) * 0.3289); }
+}
+.is-open-gate .location-figure{ background-image:url("assets/portrait-cut.png"); }
+.js-webp.is-open-gate .location-figure{ background-image:url("assets/portrait-cut.webp"); }
+/* без JS стартового экрана нет — показываем сразу */
+html:not(.js) .location-figure{ background-image:url("assets/portrait-cut.png"); }
 
 .section--location .location-wrap{
   -webkit-box-flex:1; -ms-flex:1 1 auto; flex:1 1 auto;
@@ -1136,8 +1152,8 @@ html:not(.js) .section--photo-date{ --photo:url("assets/PHOTO-2026-09-02-16-29-1
   /* заливаем поля вокруг колонки на широком экране */
   -webkit-box-shadow:0 0 0 100vmax #f4e7db;
   box-shadow:0 0 0 100vmax #f4e7db;
-  -webkit-transition:opacity .55s var(--ease);
-  transition:opacity .55s var(--ease);
+  -webkit-transition:opacity .46s var(--ease), -webkit-transform .46s var(--ease);
+  transition:opacity .46s var(--ease), transform .46s var(--ease);
 }
 @supports (height:1svh){
   .js .gate{ --gh:100svh; }
@@ -1149,8 +1165,8 @@ html:not(.js) .section--photo-date{ --photo:url("assets/PHOTO-2026-09-02-16-29-1
   inset:0;
   background:-webkit-gradient(linear,left top,left bottom,from(#fdf8f4),to(#efdfd0));
   background:linear-gradient(180deg,#fdf8f4,#efdfd0);
-  -webkit-transition:opacity .6s var(--ease) .35s;
-  transition:opacity .6s var(--ease) .35s;
+  -webkit-transition:opacity .42s var(--ease) .34s;
+  transition:opacity .42s var(--ease) .34s;
 }
 .gate.is-opening::before{ opacity:0; }
 
@@ -1163,7 +1179,15 @@ html:not(.js) .section--photo-date{ --photo:url("assets/PHOTO-2026-09-02-16-29-1
   -webkit-animation-play-state:paused; animation-play-state:paused;
 }
 
-.gate.is-open{ opacity:0; pointer-events:none; }
+.gate.is-open{
+  opacity:0;
+  pointer-events:none;
+  /* Уходим ВВЕРХ, подхватывая движение письма, и чуть наезжаем — так переход
+     к приглашению читается как продолжение одного жеста, а не как новая сцена
+     после паузы. */
+  -webkit-transform:translateX(-50%) translateY(-4%) scale(1.06);
+  transform:translateX(-50%) translateY(-4%) scale(1.06);
+}
 
 /* ---------- конверт ---------- */
 
@@ -1184,8 +1208,9 @@ html:not(.js) .section--photo-date{ --photo:url("assets/PHOTO-2026-09-02-16-29-1
   background:none;
   cursor:pointer;
   line-height:0;
-  -webkit-perspective:1500px;
-  perspective:1500px;
+  /* ближе камера — заметнее дуга, по которой уходит клапан */
+  -webkit-perspective:1100px;
+  perspective:1100px;
   -webkit-tap-highlight-color:transparent;
 }
 
@@ -1205,18 +1230,64 @@ html:not(.js) .section--photo-date{ --photo:url("assets/PHOTO-2026-09-02-16-29-1
   box-shadow:0 24px 60px -30px rgba(87,20,36,.45);
 }
 .js-webp .env__layer{ background-image:url("assets/gate-envelope.webp"); }
+.js-webp .env__flap::after{
+  background-image:
+    linear-gradient(180deg, rgba(198,150,88,.62), rgba(150,104,58,.72)),
+    url("assets/gate-envelope.webp");
+}
+
+
+/* Внутренность конверта. Поворачиваясь, клапан укорачивается по вертикали —
+   его нижняя кромка ползёт вверх, и между ней и карманом открывается щель.
+   Без этого слоя в щели видна подложка экрана, и получается белый вырез.
+   Здесь лежит бумага подкладки: темнее к сгибу, светлее вглубь. */
+.env__inside{
+  position:absolute;
+  inset:0;
+  z-index:1;
+  background:-webkit-gradient(linear,left top,left bottom,from(#d8c3aa),color-stop(18%,#e6d3bd),color-stop(55%,#f0e2d2),to(#f6ecdf));
+  background:linear-gradient(180deg,#d8c3aa 0%,#e6d3bd 18%,#f0e2d2 55%,#f6ecdf 100%);
+}
+/* у самого сгиба глубже и темнее — там бумага уходит внутрь */
+.env__inside::before{
+  content:'';
+  position:absolute;
+  left:0; right:0; top:0;
+  height:46%;
+  background:-webkit-gradient(linear,left top,left bottom,from(rgba(87,20,36,.28)),to(rgba(87,20,36,0)));
+  background:linear-gradient(180deg,rgba(87,20,36,.28),rgba(87,20,36,0));
+}
+
+/* Подкладка непрозрачна — иначе щель не закрыть. Но к концу она бы заслонила
+   приглашение, поэтому уходит вместе с карманом, в такт его отъезду. */
+.env.is-opening .env__inside{
+  -webkit-animation:insideFade .35s var(--ease) .58s forwards;
+  animation:insideFade .35s var(--ease) .58s forwards;
+}
+@-webkit-keyframes insideFade{ from{opacity:1} to{opacity:0} }
+@keyframes insideFade{ from{opacity:1} to{opacity:0} }
+
+/* Линия сгиба снята с самого файла.
+   Усреднил профиль поперёк кружевной ленты по двум сотням столбцов, выровняв
+   их по осевой: лента занимает 11px вокруг неё, верхняя кромка проходит на
+   0.94% высоты выше. Отсюда линия сгиба y = 0.370·x + 40.23 — на краю 40.2%,
+   в центре 58.7%.
+   Режем ровно по верхней кромке: ленты целиком остаются на корпусе, как на
+   образце — там на раскрытом конверте они лежат внизу, а вверх уходит только
+   треугольник клапана с узорной подкладкой. Над лентами не остаётся ни полоски
+   лишней бумаги, и линия чистая, без плоского участка. */
 
 /* нижняя часть — карман */
 .env__pocket{
-  z-index:2;
-  -webkit-clip-path:polygon(0 38.5%, 36% 49.4%, 50% 48.4%, 64% 49.4%, 100% 38.5%, 100% 100%, 0 100%);
-  clip-path:polygon(0 38.5%, 36% 49.4%, 50% 48.4%, 64% 49.4%, 100% 38.5%, 100% 100%, 0 100%);
+  z-index:3;
+  -webkit-clip-path:polygon(0 40.2%, 50% 58.7%, 100% 40.2%, 100% 100%, 0 100%);
+  clip-path:polygon(0 40.2%, 50% 58.7%, 100% 40.2%, 100% 100%, 0 100%);
 }
 /* верхняя — клапан, откидывается от верхней кромки */
 .env__flap{
-  z-index:3;
-  -webkit-clip-path:polygon(0 0, 100% 0, 100% 38.5%, 64% 49.4%, 50% 48.4%, 36% 49.4%, 0 38.5%);
-  clip-path:polygon(0 0, 100% 0, 100% 38.5%, 64% 49.4%, 50% 48.4%, 36% 49.4%, 0 38.5%);
+  z-index:4;
+  -webkit-clip-path:polygon(0 0, 100% 0, 100% 40.2%, 50% 58.7%, 0 40.2%);
+  clip-path:polygon(0 0, 100% 0, 100% 40.2%, 50% 58.7%, 0 40.2%);
   -webkit-transform-origin:50% 0;
   transform-origin:50% 0;
 }
@@ -1236,7 +1307,7 @@ html:not(.js) .section--photo-date{ --photo:url("assets/PHOTO-2026-09-02-16-29-1
   top:49.3%;
   width:36.3%;
   height:20.4%;
-  z-index:4;
+  z-index:5;
   border-radius:50%;
   pointer-events:none;
   -webkit-transition:-webkit-transform .16s var(--ease), opacity .3s var(--ease), background .2s var(--ease), -webkit-box-shadow .2s var(--ease);
@@ -1253,10 +1324,6 @@ html:not(.js) .section--photo-date{ --photo:url("assets/PHOTO-2026-09-02-16-29-1
   box-shadow:inset 0 3px 14px rgba(87,20,36,.55);
 }
 /* и весь конверт заметно проседает — нажатие ощущается физически */
-.env{
-  -webkit-transition:-webkit-transform .16s var(--ease), -webkit-filter .16s var(--ease);
-  transition:transform .16s var(--ease), filter .16s var(--ease);
-}
 .env:active{
   -webkit-transform:translate(-50%,-50%) scale(.985);
   transform:translate(-50%,-50%) scale(.985);
@@ -1267,38 +1334,131 @@ html:not(.js) .section--photo-date{ --photo:url("assets/PHOTO-2026-09-02-16-29-1
 /* в момент клика от печати расходится волна — одиночная, винным тоном:
    он единственный заметен и на кремовой бумаге, и на золоте */
 .env.is-opening .env__fx{
-  -webkit-animation:sealWave .75s var(--ease) forwards;
-  animation:sealWave .75s var(--ease) forwards;
+  -webkit-animation:sealWave .9s cubic-bezier(.22,.9,.3,1) forwards;
+  animation:sealWave .9s cubic-bezier(.22,.9,.3,1) forwards;
 }
+/* Печать не просто гаснет: сначала она вдавлена (её только что нажали),
+   потом отпускает — короткий отскок — и от неё расходится волна. */
 @-webkit-keyframes sealWave{
-  0%   { -webkit-box-shadow:0 0 0 0 rgba(122,37,55,.34); opacity:1 }
-  100% { -webkit-box-shadow:0 0 0 62px rgba(122,37,55,0); opacity:0 }
+  0%   { -webkit-transform:scale(.88); -webkit-box-shadow:0 0 0 0 rgba(122,37,55,.36); opacity:1 }
+  16%  { -webkit-transform:scale(1.035) }
+  30%  { -webkit-transform:scale(1) }
+  100% { -webkit-transform:scale(1); -webkit-box-shadow:0 0 0 66px rgba(122,37,55,0); opacity:0 }
 }
 @keyframes sealWave{
-  0%   { box-shadow:0 0 0 0 rgba(122,37,55,.34); opacity:1 }
-  100% { box-shadow:0 0 0 62px rgba(122,37,55,0); opacity:0 }
+  0%   { transform:scale(.88); box-shadow:0 0 0 0 rgba(122,37,55,.36); opacity:1 }
+  16%  { transform:scale(1.035) }
+  30%  { transform:scale(1) }
+  100% { transform:scale(1); box-shadow:0 0 0 66px rgba(122,37,55,0); opacity:0 }
 }
 
-.env.is-opening .env__flap{
-  -webkit-animation:gateFlap 1s var(--ease) forwards;
-  animation:gateFlap 1s var(--ease) forwards;
-}
+/* Слои под анимацию готовим заранее — ещё пока палец на печати. Если ставить
+   will-change одновременно со стартом, браузер не успевает вынести слой на
+   композитор, и первые кадры проседают. Держим подсказку только на время
+   нажатия и раскрытия, чтобы не занимать память впустую. */
+.env:active .env__flap,
+.env:active .env__pocket,
+.env.is-opening .env__flap,
 .env.is-opening .env__pocket{
-  -webkit-animation:gatePocket .85s var(--ease) .3s forwards;
-  animation:gatePocket .85s var(--ease) .3s forwards;
+  will-change:transform, opacity;
+}
+
+/* ---------- физика раскрытия ----------
+   Плоский поворот картинки выглядит как перелистывание слайда. Настоящий
+   клапан делает три вещи одновременно: уходит по дуге, темнеет (бумага
+   отворачивается от света), а перевалив за вертикаль — показывает изнанку.
+   И роняет тень на карман под собой. Всё это здесь и собрано. */
+
+.env.is-opening .env__flap{
+  -webkit-animation:gateFlap .85s cubic-bezier(.34,.02,.24,1) .06s forwards;
+  animation:gateFlap .85s cubic-bezier(.34,.02,.24,1) .06s forwards;
+}
+
+/* затенение: чем сильнее клапан отвёрнут, тем меньше на него падает света */
+.env__flap::before{
+  content:'';
+  position:absolute;
+  inset:0;
+  opacity:0;
+  background:-webkit-gradient(linear,left top,left bottom,from(rgba(87,20,36,.10)),to(rgba(87,20,36,.34)));
+  background:linear-gradient(180deg,rgba(87,20,36,.10),rgba(87,20,36,.34));
+}
+/* изнанка: за вертикалью мы видим уже не лицо конверта, а его подкладку,
+   поэтому узор плавно уступает место чистой бумаге */
+.env__flap::after{
+  content:'';
+  position:absolute;
+  inset:0;
+  opacity:0;
+  /* Подкладка клапана на референсе — узорная, в золоте. Берём тот же снимок
+     и тонируем: рисунок проступает, но читается как изнанка, а не как лицо. */
+  background:
+    -webkit-gradient(linear,left top,left bottom,from(rgba(198,150,88,.62)),to(rgba(150,104,58,.72))),
+    url("assets/gate-envelope.jpg") center/100% 100% no-repeat;
+  background:
+    linear-gradient(180deg, rgba(198,150,88,.62), rgba(150,104,58,.72)),
+    url("assets/gate-envelope.jpg") center/100% 100% no-repeat;
+  background-blend-mode:multiply, normal;
+  -webkit-box-shadow:inset 0 -18px 30px -18px rgba(87,20,36,.32);
+  box-shadow:inset 0 -18px 30px -18px rgba(87,20,36,.32);
+}
+.env.is-opening .env__flap::before{
+  -webkit-animation:flapShade .85s cubic-bezier(.34,.02,.24,1) .06s forwards;
+  animation:flapShade .85s cubic-bezier(.34,.02,.24,1) .06s forwards;
+}
+.env.is-opening .env__flap::after{
+  -webkit-animation:flapInner .85s cubic-bezier(.34,.02,.24,1) .06s forwards;
+  animation:flapInner .85s cubic-bezier(.34,.02,.24,1) .06s forwards;
+}
+
+/* тень, которую поднимающийся клапан кладёт на карман */
+.env__pocket::before{
+  content:'';
+  position:absolute;
+  left:0; right:0; top:0;
+  height:62%;
+  opacity:0;
+  background:-webkit-gradient(linear,left top,left bottom,from(rgba(87,20,36,.42)),to(rgba(87,20,36,0)));
+  background:linear-gradient(180deg,rgba(87,20,36,.42),rgba(87,20,36,0));
+}
+.env.is-opening .env__pocket::before{
+  -webkit-animation:flapCast .85s cubic-bezier(.34,.02,.24,1) .06s forwards;
+  animation:flapCast .85s cubic-bezier(.34,.02,.24,1) .06s forwards;
+}
+
+.env.is-opening .env__pocket{
+  -webkit-animation:gatePocket .55s cubic-bezier(.5,0,.75,.6) .52s forwards;
+  animation:gatePocket .55s cubic-bezier(.5,0,.75,.6) .52s forwards;
 }
 
 @-webkit-keyframes gateFlap{
-  0%{ -webkit-transform:rotateX(0deg) } 100%{ -webkit-transform:rotateX(-112deg) }
+  0%{ -webkit-transform:rotateX(0deg) }
+  100%{ -webkit-transform:rotateX(-118deg) }
 }
 @keyframes gateFlap{
-  0%{ transform:rotateX(0deg) } 100%{ transform:rotateX(-112deg) }
+  0%{ transform:rotateX(0deg) }
+  100%{ transform:rotateX(-118deg) }
 }
+
+@-webkit-keyframes flapShade{ 0%{opacity:0} 46%{opacity:1} 100%{opacity:.55} }
+@keyframes flapShade{ 0%{opacity:0} 46%{opacity:1} 100%{opacity:.55} }
+
+/* переключение на изнанку — вокруг вертикали, то есть примерно на середине хода */
+@-webkit-keyframes flapInner{ 0%,42%{opacity:0} 56%,100%{opacity:1} }
+@keyframes flapInner{ 0%,42%{opacity:0} 56%,100%{opacity:1} }
+
+/* тень нарастает, пока клапан над карманом, и уходит, когда он поднялся */
+@-webkit-keyframes flapCast{ 0%{opacity:0} 30%{opacity:1} 72%{opacity:.35} 100%{opacity:0} }
+@keyframes flapCast{ 0%{opacity:0} 30%{opacity:1} 72%{opacity:.35} 100%{opacity:0} }
+
+/* карман не просто съезжает, а уходит от зрителя: вниз, чуть уменьшаясь */
 @-webkit-keyframes gatePocket{
-  0%{ -webkit-transform:translateY(0) } 100%{ -webkit-transform:translateY(104%) }
+  0%{ -webkit-transform:translateY(0) scale(1); opacity:1 }
+  100%{ -webkit-transform:translateY(106%) scale(.97); opacity:.72 }
 }
 @keyframes gatePocket{
-  0%{ transform:translateY(0) } 100%{ transform:translateY(104%) }
+  0%{ transform:translateY(0) scale(1); opacity:1 }
+  100%{ transform:translateY(106%) scale(.97); opacity:.72 }
 }
 
 /* ---------- подсказка ---------- */
@@ -1345,9 +1505,9 @@ html:not(.js) .section--photo-date{ --photo:url("assets/PHOTO-2026-09-02-16-29-1
     --paper-soft:#fffaf6;
     --wine:#7a2537;
     --wine-deep:#571424;
-    --wine-soft:#a55d6f;
+    --wine-soft:#a1596b;
     --text:#542430;
-    --text-soft:#8f6770;
+    --text-soft:#8c646d;
     --gold:#b78a52;
     --gold-soft:#d7be93;
     --rose:#e4c9cf;
@@ -1402,6 +1562,7 @@ html:not(.js) .section--photo-date{ --photo:url("assets/PHOTO-2026-09-02-16-29-1
 <div class="gate" id="gate">
 
   <button class="env" id="envelopeBtn" type="button" aria-label="Чакырууну ачуу">
+    <span class="env__inside" aria-hidden="true"></span>
     <span class="env__layer env__pocket"></span>
     <span class="env__layer env__flap"></span>
     <span class="env__fx" aria-hidden="true"></span>
@@ -1440,7 +1601,7 @@ html:not(.js) .section--photo-date{ --photo:url("assets/PHOTO-2026-09-02-16-29-1
 
     <div class="hero-copy">
       <h1 class="hero-copy__name reveal d3">Айчүрөк</h1>
-      <p class="hero-copy__sub reveal d4">Kyz Uzatuu</p>
+      <p class="hero-copy__sub reveal d4" lang="ky-Latn">Kyz Uzatuu</p>
       <p class="hero-copy__date reveal d5">22-сентябрь, 2026-жыл · 17:00</p>
     </div>
 
@@ -1477,7 +1638,7 @@ html:not(.js) .section--photo-date{ --photo:url("assets/PHOTO-2026-09-02-16-29-1
 
     <section class="section section--compact">
     <div class="section-card owners-card rv">
-      <p class="section-label" style="font-size: 12px; font-weight: 700;">Урматтоо менен той ээлери</p>
+      <p class="section-label">Урматтоо менен той ээлери</p>
       <div class="divider" aria-hidden="true"></div>
       <p class="owners-name">Арстан&nbsp;<span class="amp">&amp;</span>&nbsp;Зуура</p>
     </div>
@@ -1526,13 +1687,7 @@ html:not(.js) .section--photo-date{ --photo:url("assets/PHOTO-2026-09-02-16-29-1
   <!-- ═══════════ ДАРЕГИБИЗ ═══════════ -->
   <section class="section section--tight section--location">
 
-    <div class="location-figure rv" aria-hidden="true">
-      <picture>
-        <source srcset="assets/portrait-cut.webp" type="image/webp">
-        <img src="assets/portrait-cut.png" width="420" height="1277"
-             alt="" loading="lazy" decoding="async">
-      </picture>
-    </div>
+    <div class="location-figure rv" aria-hidden="true"></div>
 
     <div class="location-wrap rv">
       <p class="section-label">Дарегибиз</p>
@@ -1565,7 +1720,6 @@ html:not(.js) .section--photo-date{ --photo:url("assets/PHOTO-2026-09-02-16-29-1
 
   <!-- ═══════════ ПОДВАЛ ═══════════ -->
   <footer class="footer rv">
-    <div class="divider-dot" aria-hidden="true"></div>
     <p class="footer-line">Айчүрөк</p>
     <p class="footer-event">Кыз узатуу</p>
     <p class="footer-date">22-сентябрь, 2026-жыл &middot; 17:00</p>
@@ -1826,9 +1980,13 @@ html:not(.js) .section--photo-date{ --photo:url("assets/PHOTO-2026-09-02-16-29-1
 
     var passive = false;
     try {
-      window.addEventListener('t', null, Object.defineProperty({}, 'passive', {
+      var probe = Object.defineProperty({}, 'passive', {
         get: function () { passive = true; return true; }
-      }));
+      });
+      /* слушатель фиктивного события надо снять: без removeEventListener
+         он остаётся висеть на window до конца жизни страницы */
+      window.addEventListener('t', null, probe);
+      window.removeEventListener('t', null, probe);
     } catch (e) {}
     var passiveOpt = passive ? { passive: true } : false;
 
@@ -1955,9 +2113,13 @@ html:not(.js) .section--photo-date{ --photo:url("assets/PHOTO-2026-09-02-16-29-1
 
     var passive = false;
     try {
-      window.addEventListener('t', null, Object.defineProperty({}, 'passive', {
+      var probe = Object.defineProperty({}, 'passive', {
         get: function () { passive = true; return true; }
-      }));
+      });
+      /* слушатель фиктивного события надо снять: без removeEventListener
+         он остаётся висеть на window до конца жизни страницы */
+      window.addEventListener('t', null, probe);
+      window.removeEventListener('t', null, probe);
     } catch (e) {}
     var passiveOpt = passive ? { passive: true } : false;
 
@@ -2024,8 +2186,10 @@ html:not(.js) .section--photo-date{ --photo:url("assets/PHOTO-2026-09-02-16-29-1
 
     /* длительности держим в JS в согласии с CSS: клапан .85s,
        письмо .5s задержки + 1s, затем уводим сам экран */
-    var OPEN_TIME = reduced ? 0 : 1000;   /* столько длится раскрытие */
-    var FADE = reduced ? 260 : 560;
+    /* Экран уходит, едва письмо тронулось (0.64с при его ходе 0.34-0.96с):
+      лендинг проступает прямо под едущей карточкой, паузы нет вовсе. */
+    var OPEN_TIME = reduced ? 0 : 640;
+    var FADE = reduced ? 260 : 460;
 
     function open() {
       if (opened) return;
