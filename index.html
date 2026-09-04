@@ -1149,8 +1149,11 @@ html:not(.js) .section--photo-date{ --photo:url("assets/PHOTO-2026-09-02-16-29-1
   transform:translateX(-50%);
   z-index:200;
   overflow:hidden;                 /* лишнее от cover-размера обрезается здесь */
-  -webkit-transition:opacity .46s var(--ease), -webkit-transform .46s var(--ease);
-  transition:opacity .46s var(--ease), transform .46s var(--ease);
+  /* заливаем поля вокруг колонки на широком экране */
+  -webkit-box-shadow:0 0 0 100vmax #f4e7db;
+  box-shadow:0 0 0 100vmax #f4e7db;
+  -webkit-transition:opacity .55s var(--ease);
+  transition:opacity .55s var(--ease);
 }
 @supports (height:1lvh){
   /* lvh — высота окна со спрятанной адресной строкой, то есть максимальная.
@@ -1165,38 +1168,22 @@ html:not(.js) .section--photo-date{ --photo:url("assets/PHOTO-2026-09-02-16-29-1
   inset:0;
   background:-webkit-gradient(linear,left top,left bottom,from(#fdf8f4),to(#efdfd0));
   background:linear-gradient(180deg,#fdf8f4,#efdfd0);
-  -webkit-transition:opacity .42s var(--ease) .34s;
-  transition:opacity .42s var(--ease) .34s;
+  -webkit-transition:opacity .6s var(--ease) .35s;
+  transition:opacity .6s var(--ease) .35s;
 }
 .gate.is-opening::before{ opacity:0; }
 
 /* пока конверт закрыт — страница под ним не листается */
-/* Поля вокруг колонки заливаем фоном документа. Раньше тут была тень
-   box-shadow:0 0 0 100vmax — она заставляла браузер держать и перерисовывать
-   область в тысячи пикселей вокруг экрана, и всё это ещё раз при уходе
-   стартового экрана, когда он меняет прозрачность и масштаб. */
-.is-locked{ background:#f4e7db; }
 .is-locked, .is-locked body{ overflow:hidden; height:100%; }
 .is-locked .music{ opacity:0; pointer-events:none; }
 
 /* и не проигрывает своё появление раньше времени */
 .is-locked .reveal,
-.is-locked .hero-photo-reveal,
-/* лепестки под закрытым конвертом не видны, но композитор всё равно
-   пересобирал бы 26 слоёв на каждом кадре раскрытия */
-.is-locked .petals i{
+.is-locked .hero-photo-reveal{
   -webkit-animation-play-state:paused; animation-play-state:paused;
 }
 
-.gate.is-open{
-  opacity:0;
-  pointer-events:none;
-  /* Уходим ВВЕРХ, подхватывая движение письма, и чуть наезжаем — так переход
-     к приглашению читается как продолжение одного жеста, а не как новая сцена
-     после паузы. */
-  -webkit-transform:translateX(-50%) translateY(-4%) scale(1.06);
-  transform:translateX(-50%) translateY(-4%) scale(1.06);
-}
+.gate.is-open{ opacity:0; pointer-events:none; }
 
 /* ---------- конверт ---------- */
 
@@ -1217,9 +1204,8 @@ html:not(.js) .section--photo-date{ --photo:url("assets/PHOTO-2026-09-02-16-29-1
   background:none;
   cursor:pointer;
   line-height:0;
-  /* ближе камера — заметнее дуга, по которой уходит клапан */
-  -webkit-perspective:1100px;
-  perspective:1100px;
+  -webkit-perspective:1500px;
+  perspective:1500px;
   -webkit-tap-highlight-color:transparent;
 }
 
@@ -1235,65 +1221,22 @@ html:not(.js) .section--photo-date{ --photo:url("assets/PHOTO-2026-09-02-16-29-1
   background-image:url("assets/gate-envelope.jpg");
   background-size:100% 100%;
   background-repeat:no-repeat;
+  -webkit-box-shadow:0 24px 60px -30px rgba(87,20,36,.45);
+  box-shadow:0 24px 60px -30px rgba(87,20,36,.45);
 }
 .js-webp .env__layer{ background-image:url("assets/gate-envelope.webp"); }
 
-
-/* Внутренность конверта. Поворачиваясь, клапан укорачивается по вертикали —
-   его нижняя кромка ползёт вверх, и между ней и карманом открывается щель.
-   Без этого слоя в щели видна подложка экрана, и получается белый вырез.
-   Здесь лежит бумага подкладки: темнее к сгибу, светлее вглубь. */
-.env__inside{
-  position:absolute;
-  inset:0;
-  z-index:1;
-  background:-webkit-gradient(linear,left top,left bottom,from(#d8c3aa),color-stop(18%,#e6d3bd),color-stop(55%,#f0e2d2),to(#f6ecdf));
-  /* затемнение у сгиба вписано прямо сюда — отдельный слой не нужен */
-  background:linear-gradient(180deg,#b99b78 0%,#d8c3aa 12%,#e6d3bd 30%,#f0e2d2 60%,#f6ecdf 100%);
-}
-
-
-/* Подкладка непрозрачна — иначе щель не закрыть. Но к концу она бы заслонила
-   приглашение, поэтому уходит вместе с карманом, в такт его отъезду. */
-.env.is-opening .env__inside{
-  -webkit-animation:insideFade .35s var(--ease) .58s forwards;
-  animation:insideFade .35s var(--ease) .58s forwards;
-}
-@-webkit-keyframes insideFade{ from{opacity:1} to{opacity:0} }
-@keyframes insideFade{ from{opacity:1} to{opacity:0} }
-
-/* Линия сгиба снята с самого файла.
-   Усреднил профиль поперёк кружевной ленты по двум сотням столбцов, выровняв
-   их по осевой: лента занимает 11px вокруг неё, верхняя кромка проходит на
-   0.94% высоты выше. Отсюда линия сгиба y = 0.370·x + 40.23 — на краю 40.2%,
-   в центре 58.7%.
-   Режем ровно по верхней кромке: ленты целиком остаются на корпусе, как на
-   образце — там на раскрытом конверте они лежат внизу, а вверх уходит только
-   треугольник клапана с узорной подкладкой. Над лентами не остаётся ни полоски
-   лишней бумаги, и линия чистая, без плоского участка. */
-
 /* нижняя часть — карман */
 .env__pocket{
-  z-index:3;
-  /* только нижние 59.8% конверта: 40.2% — линия золотых лент */
-  top:40.2%;
-  height:59.8%;
-  background-size:100% 167.224%;   /* 100 / 0.598 — картинка снова во весь конверт */
-  background-position:0 100%;      /* низом к низу, верх картинки уходит за край */
-  -webkit-clip-path:polygon(0 0, 50% 30.94%, 100% 0, 100% 100%, 0 100%);
-  clip-path:polygon(0 0, 50% 30.94%, 100% 0, 100% 100%, 0 100%);
+  z-index:2;
+  -webkit-clip-path:polygon(0 38.5%, 36% 49.4%, 50% 48.4%, 64% 49.4%, 100% 38.5%, 100% 100%, 0 100%);
+  clip-path:polygon(0 38.5%, 36% 49.4%, 50% 48.4%, 64% 49.4%, 100% 38.5%, 100% 100%, 0 100%);
 }
 /* верхняя — клапан, откидывается от верхней кромки */
 .env__flap{
-  z-index:4;
-  /* только верхние 58.7% — ниже у клапана всё равно пусто. Это
-     единственный слой, который крутится в 3D, поэтому его площадь
-     напрямую бьёт по слабым видеочипам. */
-  height:58.7%;
-  background-size:100% 170.357%;   /* 100 / 0.587 */
-  background-position:0 0;
-  -webkit-clip-path:polygon(0 0, 100% 0, 100% 68.48%, 50% 100%, 0 68.48%);
-  clip-path:polygon(0 0, 100% 0, 100% 68.48%, 50% 100%, 0 68.48%);
+  z-index:3;
+  -webkit-clip-path:polygon(0 0, 100% 0, 100% 38.5%, 64% 49.4%, 50% 48.4%, 36% 49.4%, 0 38.5%);
+  clip-path:polygon(0 0, 100% 0, 100% 38.5%, 64% 49.4%, 50% 48.4%, 36% 49.4%, 0 38.5%);
   -webkit-transform-origin:50% 0;
   transform-origin:50% 0;
 }
@@ -1313,7 +1256,7 @@ html:not(.js) .section--photo-date{ --photo:url("assets/PHOTO-2026-09-02-16-29-1
   top:49.3%;
   width:36.3%;
   height:20.4%;
-  z-index:5;
+  z-index:4;
   border-radius:50%;
   pointer-events:none;
   -webkit-transition:-webkit-transform .16s var(--ease), opacity .3s var(--ease), background .2s var(--ease), -webkit-box-shadow .2s var(--ease);
@@ -1330,6 +1273,10 @@ html:not(.js) .section--photo-date{ --photo:url("assets/PHOTO-2026-09-02-16-29-1
   box-shadow:inset 0 3px 14px rgba(87,20,36,.55);
 }
 /* и весь конверт заметно проседает — нажатие ощущается физически */
+.env{
+  -webkit-transition:-webkit-transform .16s var(--ease), -webkit-filter .16s var(--ease);
+  transition:transform .16s var(--ease), filter .16s var(--ease);
+}
 .env:active{
   -webkit-transform:translate(-50%,-50%) scale(.985);
   transform:translate(-50%,-50%) scale(.985);
@@ -1340,133 +1287,38 @@ html:not(.js) .section--photo-date{ --photo:url("assets/PHOTO-2026-09-02-16-29-1
 /* в момент клика от печати расходится волна — одиночная, винным тоном:
    он единственный заметен и на кремовой бумаге, и на золоте */
 .env.is-opening .env__fx{
-  -webkit-animation:sealWave .9s cubic-bezier(.22,.9,.3,1) forwards;
-  animation:sealWave .9s cubic-bezier(.22,.9,.3,1) forwards;
-}
-/* Печать не просто гаснет: сначала она вдавлена (её только что нажали),
-   потом отпускает — короткий отскок — и от неё расходится волна.
-   Волну рисуем отдельным кольцом через transform: раньше тут был растущий
-   box-shadow, а его композитор ускорять не умеет — браузер перерисовывал
-   кольцо на каждом кадре. */
-.env__fx::after{
-  content:'';
-  position:absolute;
-  inset:0;
-  border-radius:50%;
-  border:2px solid rgba(122,37,55,.36);
-  opacity:0;
-}
-.env.is-opening .env__fx::after{
-  -webkit-animation:sealRing .9s cubic-bezier(.22,.9,.3,1) forwards;
-  animation:sealRing .9s cubic-bezier(.22,.9,.3,1) forwards;
-}
-@-webkit-keyframes sealRing{
-  0%{ -webkit-transform:scale(1); opacity:.8 } 100%{ -webkit-transform:scale(2.6); opacity:0 }
-}
-@keyframes sealRing{
-  0%{ transform:scale(1); opacity:.8 } 100%{ transform:scale(2.6); opacity:0 }
+  -webkit-animation:sealWave .75s var(--ease) forwards;
+  animation:sealWave .75s var(--ease) forwards;
 }
 @-webkit-keyframes sealWave{
-  0%   { -webkit-transform:scale(.88); opacity:1 }
-  16%  { -webkit-transform:scale(1.035) }
-  30%  { -webkit-transform:scale(1) }
-  100% { -webkit-transform:scale(1); opacity:0 }
+  0%   { -webkit-box-shadow:0 0 0 0 rgba(122,37,55,.34); opacity:1 }
+  100% { -webkit-box-shadow:0 0 0 62px rgba(122,37,55,0); opacity:0 }
 }
 @keyframes sealWave{
-  0%   { transform:scale(.88); opacity:1 }
-  16%  { transform:scale(1.035) }
-  30%  { transform:scale(1) }
-  100% { transform:scale(1); opacity:0 }
+  0%   { box-shadow:0 0 0 0 rgba(122,37,55,.34); opacity:1 }
+  100% { box-shadow:0 0 0 62px rgba(122,37,55,0); opacity:0 }
 }
-
-/* Слои под анимацию готовим заранее — ещё пока палец на печати. Если ставить
-   will-change одновременно со стартом, браузер не успевает вынести слой на
-   композитор, и первые кадры проседают. Держим подсказку только на время
-   нажатия и раскрытия, чтобы не занимать память впустую. */
-/* Подсказку даём только клапану: он один вращается в 3D и требует
-   заранее собранного слоя. Карман просто едет вниз — обычный transform,
-   лишняя текстура во весь экран на слабом телефоне дороже выгоды. */
-.env:active .env__flap,
-.env.is-opening .env__flap{
-  will-change:transform, opacity;
-}
-
-/* ---------- физика раскрытия ----------
-   Плоский поворот картинки выглядит как перелистывание слайда. Настоящий
-   клапан делает три вещи одновременно: уходит по дуге, темнеет (бумага
-   отворачивается от света), а перевалив за вертикаль — показывает изнанку.
-   И роняет тень на карман под собой. Всё это здесь и собрано. */
 
 .env.is-opening .env__flap{
-  -webkit-animation:gateFlap .85s cubic-bezier(.34,.02,.24,1) .06s forwards;
-  animation:gateFlap .85s cubic-bezier(.34,.02,.24,1) .06s forwards;
+  -webkit-animation:gateFlap 1s var(--ease) forwards;
+  animation:gateFlap 1s var(--ease) forwards;
 }
-
-/* Затенение и изнанка — ОДИН слой вместо двух. Раньше их было два, и на
-   верхнем стоял background-blend-mode поверх фотографии: блендинг сбивает
-   быстрый путь композитора, а слой в этот момент ещё и вращается в 3D —
-   на мобильных GPU это самое дорогое место всей анимации.
-   Теперь это простой градиент: цвет подкладки конверта с затемнением к сгибу. */
-.env__flap::after{
-  content:'';
-  position:absolute;
-  inset:0;
-  opacity:0;
-  background:-webkit-gradient(linear,left top,left bottom,from(#e7d4bd),color-stop(55%,#dcc6ab),to(#cbb191));
-  background:linear-gradient(180deg,#e7d4bd 0%,#dcc6ab 55%,#cbb191 100%);
-  -webkit-box-shadow:inset 0 -18px 30px -18px rgba(87,20,36,.32);
-  box-shadow:inset 0 -18px 30px -18px rgba(87,20,36,.32);
-}
-.env.is-opening .env__flap::after{
-  -webkit-animation:flapInner .85s cubic-bezier(.34,.02,.24,1) .06s forwards;
-  animation:flapInner .85s cubic-bezier(.34,.02,.24,1) .06s forwards;
-}
-
-/* тень, которую поднимающийся клапан кладёт на карман */
-.env__pocket::before{
-  content:'';
-  position:absolute;
-  left:0; right:0; top:0;
-  height:36.5%;                    /* (62 - 40.2) / 59.8 — карман теперь с 40.2% */
-  opacity:0;
-  background:-webkit-gradient(linear,left top,left bottom,from(rgba(87,20,36,.42)),to(rgba(87,20,36,0)));
-  background:linear-gradient(180deg,rgba(87,20,36,.42),rgba(87,20,36,0));
-}
-.env.is-opening .env__pocket::before{
-  -webkit-animation:flapCast .85s cubic-bezier(.34,.02,.24,1) .06s forwards;
-  animation:flapCast .85s cubic-bezier(.34,.02,.24,1) .06s forwards;
-}
-
 .env.is-opening .env__pocket{
-  -webkit-animation:gatePocket .55s cubic-bezier(.5,0,.75,.6) .52s forwards;
-  animation:gatePocket .55s cubic-bezier(.5,0,.75,.6) .52s forwards;
+  -webkit-animation:gatePocket .85s var(--ease) .3s forwards;
+  animation:gatePocket .85s var(--ease) .3s forwards;
 }
 
 @-webkit-keyframes gateFlap{
-  0%{ -webkit-transform:rotateX(0deg) }
-  100%{ -webkit-transform:rotateX(-118deg) }
+  0%{ -webkit-transform:rotateX(0deg) } 100%{ -webkit-transform:rotateX(-112deg) }
 }
 @keyframes gateFlap{
-  0%{ transform:rotateX(0deg) }
-  100%{ transform:rotateX(-118deg) }
+  0%{ transform:rotateX(0deg) } 100%{ transform:rotateX(-112deg) }
 }
-
-/* переключение на изнанку — вокруг вертикали, то есть примерно на середине хода */
-@-webkit-keyframes flapInner{ 0%{opacity:0} 30%{opacity:.5} 56%,100%{opacity:1} }
-@keyframes flapInner{ 0%{opacity:0} 30%{opacity:.5} 56%,100%{opacity:1} }
-
-/* тень нарастает, пока клапан над карманом, и уходит, когда он поднялся */
-@-webkit-keyframes flapCast{ 0%{opacity:0} 30%{opacity:1} 72%{opacity:.35} 100%{opacity:0} }
-@keyframes flapCast{ 0%{opacity:0} 30%{opacity:1} 72%{opacity:.35} 100%{opacity:0} }
-
-/* карман не просто съезжает, а уходит от зрителя: вниз, чуть уменьшаясь */
 @-webkit-keyframes gatePocket{
-  0%{ -webkit-transform:translateY(0) scale(1); opacity:1 }
-  100%{ -webkit-transform:translateY(106%) scale(.97); opacity:.72 }
+  0%{ -webkit-transform:translateY(0) } 100%{ -webkit-transform:translateY(104%) }
 }
 @keyframes gatePocket{
-  0%{ transform:translateY(0) scale(1); opacity:1 }
-  100%{ transform:translateY(106%) scale(.97); opacity:.72 }
+  0%{ transform:translateY(0) } 100%{ transform:translateY(104%) }
 }
 
 /* ---------- подсказка ---------- */
@@ -1570,7 +1422,6 @@ html:not(.js) .section--photo-date{ --photo:url("assets/PHOTO-2026-09-02-16-29-1
 <div class="gate" id="gate">
 
   <button class="env" id="envelopeBtn" type="button" aria-label="Чакырууну ачуу">
-    <span class="env__inside" aria-hidden="true"></span>
     <span class="env__layer env__pocket"></span>
     <span class="env__layer env__flap"></span>
     <span class="env__fx" aria-hidden="true"></span>
@@ -1907,13 +1758,6 @@ html:not(.js) .section--photo-date{ --photo:url("assets/PHOTO-2026-09-02-16-29-1
       if (wanted) { stop(); } else { ensureSource(); play(); }
     }, false);
 
-    /* Пробуем стартовать сразу при загрузке. Браузеры блокируют звук до
-       первого действия пользователя, поэтому промис почти всегда отклоняется —
-       тогда музыку включит первое же касание страницы (слушатели ниже).
-       Молча глотать отказ нельзя было бы только при muted-автозапуске,
-       но фоновая музыка без звука смысла не имеет. */
-    play();
-
     /* Раньше off() вызывался до play(): если попытка отклонялась (событие без
        пользовательской активации), слушатели уже были сняты и музыка не
        включалась больше никогда. Теперь снимаем их только после успеха. */
@@ -1929,11 +1773,26 @@ html:not(.js) .section--photo-date{ --photo:url("assets/PHOTO-2026-09-02-16-29-1
       document.removeEventListener('click', firstTouch, true);
       window.removeEventListener('wheel', firstTouch, true);
     }
-    document.addEventListener('pointerdown', firstTouch, true);
-    document.addEventListener('touchstart', firstTouch, true);
-    document.addEventListener('keydown', firstTouch, true);
-    document.addEventListener('click', firstTouch, true);
-    window.addEventListener('wheel', firstTouch, true);
+
+    /* Музыка включается ТОЛЬКО после того, как гость открыл конверт.
+       Раньше play() стоял прямо при загрузке: браузеры со строгой политикой
+       автозапуска молча его отклоняли, и со стороны казалось, что всё в
+       порядке. Но Mi Browser — как и другие сборки на Chromium, где
+       автозапуск разрешён по умолчанию — честно исполнял вызов, и музыка
+       играла ещё при закрытом конверте. Слушатели касания вешаем тоже здесь:
+       иначе любой тап по стартовому экрану включал бы звук раньше времени. */
+    whenGateOpen(function () {
+      document.addEventListener('pointerdown', firstTouch, true);
+      document.addEventListener('touchstart', firstTouch, true);
+      document.addEventListener('keydown', firstTouch, true);
+      document.addEventListener('click', firstTouch, true);
+      window.addEventListener('wheel', firstTouch, true);
+
+      /* клик по конверту — настоящая пользовательская активация,
+         поэтому обычно хватает уже этой попытки */
+      ensureSource();
+      play(off);
+    });
 
     document.addEventListener('visibilitychange', function () {
       if (!wanted) return;
@@ -2188,16 +2047,18 @@ html:not(.js) .section--photo-date{ --photo:url("assets/PHOTO-2026-09-02-16-29-1
     var root = document.documentElement;
 
     /* без JS класса .js не будет, конверт скрыт и приглашение открыто сразу */
-    if (!gate || !btn) { root.className = root.className.replace(/\bis-locked\b/, ''); return; }
+    if (!gate || !btn) {
+      root.className = root.className.replace(/\bis-locked\b/, '');
+      fireGateOpen();   /* иначе подписчики выше никогда не сработают */
+      return;
+    }
 
     var opened = false;
 
     /* длительности держим в JS в согласии с CSS: клапан .85s,
        письмо .5s задержки + 1s, затем уводим сам экран */
-    /* Экран уходит, едва письмо тронулось (0.64с при его ходе 0.34-0.96с):
-      лендинг проступает прямо под едущей карточкой, паузы нет вовсе. */
-    var OPEN_TIME = reduced ? 0 : 640;
-    var FADE = reduced ? 260 : 460;
+    var OPEN_TIME = reduced ? 0 : 550;   /* столько длится раскрытие */
+    var FADE = reduced ? 260 : 560;
 
     function open() {
       if (opened) return;
